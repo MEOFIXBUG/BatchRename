@@ -13,4 +13,6 @@ namespace ProjectBatchName.Model
         public string Path { get; set; }
         public string Error { get; set; }
     }
+
+   
 }

@@ -6,7 +6,7 @@
         xmlns:local="clr-namespace:ProjectBatchName"
         mc:Ignorable="d"
         DataContext="{StaticResource MainVM}"
-        Title="MainWindow" Height="450" Width="800">
+        Title="Batch Rename" Height="450" Width="800">
     <Grid>
         <Grid.ColumnDefinitions>
             <ColumnDefinition Width="*" />
@@ -18,7 +18,7 @@
         <StackPanel Orientation="Vertical" Grid.Row="0" Margin="0 0 0 0">
             <ToolBarTray>
                 <ToolBar>
-                    <StackPanel Orientation="Horizontal">
+                    <StackPanel Orientation="Horizontal" Height="20" VerticalAlignment="Top">
                         <Button  Height="20" Margin="8,0,10,0" VerticalAlignment="Center" HorizontalAlignment="Center" Name="RefreshButton" >
                             <StackPanel Orientation="Horizontal" VerticalAlignment="Center" HorizontalAlignment="Center">
                                 <Image Source="/Images/refresh.png" Height="16" Width="16" RenderOptions.BitmapScalingMode="HighQuality"/>
@@ -31,33 +31,38 @@
                                 <TextBlock Text=" Help" FontSize="12"></TextBlock>
                             </StackPanel>
                         </Button>
-                        <Button  Height="20" Margin="5,0,10,0" HorizontalAlignment="Center" VerticalAlignment="Center" Name="StartBatchButton" >
+                        <Button  Height="20" Margin="5,0,10,0" HorizontalAlignment="Center" VerticalAlignment="Center" 
+                                 Name="StartBatchButton" >
                             <StackPanel Orientation="Horizontal" VerticalAlignment="Center" HorizontalAlignment="Center">
                                 <Image Source="/Images/start.png" Height="16" Width="16" RenderOptions.BitmapScalingMode="HighQuality"/>
                                 <TextBlock Text=" START BATCH" FontSize="12"></TextBlock>
                             </StackPanel>
                         </Button>
+
+
                     </StackPanel>
                 </ToolBar>
             </ToolBarTray>
             <ToolBarTray>
                 <ToolBar x:Name="MethodBar" Height="30" Background="AliceBlue">
-                    <StackPanel Orientation="Horizontal">
+                    <StackPanel Orientation="Horizontal" DataContext="{StaticResource MethodsVM}">
+                        <!--Methods-->
                         <Label Content="Method: "/>
-                        <ComboBox Width="125" Name="actionCombobox" Height="20">
-                            <ComboBox.ItemTemplate>
-                                <DataTemplate>
-                                    <TextBlock Text="{Binding name}"/>
-                                </DataTemplate>
-                            </ComboBox.ItemTemplate>
+                        <ComboBox Width="125" x:Name="methodComboBox" Height="20" 
+                                  SelectedItem="{Binding SelectedOperation}"
+                                  DisplayMemberPath="Name"
+                                  FontWeight="Bold" Foreground="Red"
+                                  ItemsSource="{Binding Operations}" Margin="0,3,0,0" VerticalAlignment="Top">
+
                         </ComboBox>
-                        <Button  Margin="5,0,7,0" Name="AddMethodButton" >
+                        <Button  Margin="5,0,7,0" Name="AddMethodButton"    
+                                 Command="{Binding AddOperationCommand}">
                             <StackPanel Orientation="Horizontal">
                                 <Image Source="/Images/icons8-add-file-64.png" Height="20" Width="20"/>
                                 <TextBlock Text="Add method"/>
                             </StackPanel>
                         </Button>
-                        <Button Margin="0,0,7,0" Name="DeleteButotn" >
+                        <Button Margin="0,0,7,0" Name="DeleteButotn" Command="{Binding DeleteOperationCommand}" >
                             <StackPanel Orientation="Horizontal">
                                 <Image Source="/Images/icons8-delete-database-48.png" Margin="0 0 3 2"/>
                                 <Image Source="/Images/icons8-delete-document-64.png" Margin="0 1 0 2"/>
@@ -104,27 +109,34 @@
                 </ToolBar>
             </ToolBarTray>
         </StackPanel>
-        <Grid Grid.Row="1" Margin="0 0 0 0 ">
+        <Grid Grid.Row="2" Margin="0 0 0 0 ">
             <Grid.ColumnDefinitions>
-                <ColumnDefinition Width="300"/>
-                <ColumnDefinition Width="*"/>
+                <ColumnDefinition Width="2*"/>
+                <ColumnDefinition Width="5*"/>
             </Grid.ColumnDefinitions>
-            <ListBox Name="ActionListBox" Grid.Column="0" ScrollViewer.HorizontalScrollBarVisibility="Disabled">
-                <ListBox.ContextMenu>
+            
+            <ListView Name="ActionListBox"
+                     DataContext="{StaticResource MethodsVM}"
+                     ItemsSource="{Binding SelectedOperations}"   
+                     SelectionMode="Extended"
+                     SelectedIndex="{Binding SelectedOperationIndex}"                     
+                     Grid.Column="0" ScrollViewer.HorizontalScrollBarVisibility="Disabled">
+                <ListView.ContextMenu>
                     <ContextMenu>
-                        <MenuItem Header="Edit" />
+                        <MenuItem Header="Edit"/>
                     </ContextMenu>
-                </ListBox.ContextMenu>
+                </ListView.ContextMenu>
                 <ListBox.ItemTemplate>
                     <DataTemplate>
-                        <WrapPanel Height="40">
-                            <TextBlock Text="{Binding name}" FontFamily="Comic Sans MS" FontSize="15"/>
-                            <TextBlock Text=": " FontFamily="Comic Sans MS" FontSize="15"/>
-                            <TextBlock Text="{Binding Args.Details}" FontFamily="Comic Sans MS" FontSize="15"/>
-                        </WrapPanel>
+                        <StackPanel Orientation="Vertical">
+                            <TextBlock Text="{Binding Name}" FontFamily="Comic Sans MS" FontWeight="Bold" Foreground="Red"/>
+                            
+                            <TextBlock Text="{Binding Description}" FontFamily="Comic Sans MS" />
+                        </StackPanel>
                     </DataTemplate>
                 </ListBox.ItemTemplate>
-            </ListBox>
+            </ListView>
+            <GridSplitter Width="3px"></GridSplitter>
             <TabControl Grid.Column="1">
                 <TabItem>
                     <TabItem.Header>
@@ -148,8 +160,8 @@
                                             <TextBlock Text="Del"/>
                                         </StackPanel>
                                     </Button>
-                                    
-                                    
+
+
                                 </StackPanel>
                             </ToolBar>
                         </ToolBarTray>

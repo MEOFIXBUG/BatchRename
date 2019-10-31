@@ -58,9 +58,12 @@
     <Compile Include="Logic\ILogic.cs" />
     <Compile Include="Logic\Logic.cs" />
     <Compile Include="Model\fileInfo.cs" />
+    <Compile Include="Model\StringArgs.cs" />
+    <Compile Include="Model\StringOperation.cs" />
     <Compile Include="Services\File\FileService.cs" />
     <Compile Include="Services\File\IFileService.cs" />
     <Compile Include="ViewModel\BaseViewModel.cs" />
+    <Compile Include="ViewModel\MethodsViewModel.cs" />
     <Compile Include="ViewModel\MainViewModel.cs" />
     <Page Include="MainWindow.xaml">
       <Generator>MSBuild:Compile</Generator>

@@ -18,6 +18,7 @@ namespace ProjectBatchName.ViewModel
         private readonly IFileService fileService;
         private readonly ILogic logic;
         //private readonly IFolderService Service;
+
         private ObservableCollection<fileInfo> _fileInfoList;
         public ObservableCollection<fileInfo> fileInfoList
         {
@@ -38,13 +39,18 @@ namespace ProjectBatchName.ViewModel
                 }
             }
         }
+
         /*Add New Item Command*/
         public ICommand AddFilesCommand { get; set; }
+
         private bool CanExecuteAddFileCommand()
         {
             return true;
         }
 
+        /// <summary>
+        /// Add File Command Implemmentation
+        /// </summary>
         private void ExecuteAddFileCommand()
         {
             var screen = new Microsoft.Win32.OpenFileDialog();
@@ -56,7 +62,7 @@ namespace ProjectBatchName.ViewModel
                     var temp = new fileInfo();
                     temp.Filename = System.IO.Path.GetFileName(file);
                     temp.Path = file;
-                    if (fileService.IsExist(fileInfoList,temp)>=0)
+                    if (fileService.IsExist(fileInfoList,temp)>=0) //should use static
                     {
                         MessageBox.Show("Existed file");
                     }
@@ -68,6 +74,10 @@ namespace ProjectBatchName.ViewModel
             }
         }
         public bool Isloaded = false;
+
+        /// <summary>
+        /// Constructor MainViewModel
+        /// </summary>
         public MainViewModel()
         {
             logic = Logic.Logic.Instance;
@@ -81,6 +91,7 @@ namespace ProjectBatchName.ViewModel
             {
                 fileInfoList = new ObservableCollection<fileInfo>();
             }
+
             AddFilesCommand = new RelayCommand<object>(
                 (p) =>
                 CanExecuteAddFileCommand(),

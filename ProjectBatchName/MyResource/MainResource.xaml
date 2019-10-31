@@ -3,4 +3,5 @@
                     xmlns:viewmodel="clr-namespace:ProjectBatchName.ViewModel"
                     xmlns:local="clr-namespace:ProjectBatchName.MyResource">
     <viewmodel:MainViewModel x:Key="MainVM"></viewmodel:MainViewModel>
+    <viewmodel:MethodsViewModel x:Key="MethodsVM"></viewmodel:MethodsViewModel>
 </ResourceDictionary>
