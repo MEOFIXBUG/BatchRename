@@ -99,7 +99,7 @@
                         </Button>
                         <Button  Name="ChoosePreset" Margin="5,0,5,0">
                             <StackPanel Orientation="Horizontal">
-                                <Label Content="Presets: "/>
+                                <Label Content="Presets: " Padding="2"/>
                                 <ComboBox Name="PresetCombobox" Width="100" Margin="0 2 0 2 ">
 
                                 </ComboBox>
