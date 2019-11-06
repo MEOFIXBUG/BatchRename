@@ -79,7 +79,7 @@ namespace ProjectBatchName.Model
             }
         }
     }
-
+    //By Vu Pham Duc Thang
     class NewFullnameNormalize : StringOperation
     {
         public override string Name => "FullnameNormalize";
@@ -88,11 +88,14 @@ namespace ProjectBatchName.Model
 
         public override string Operate(string origin)
         {
-            return "the quick brown fox jump over the lazy dog";
-            //do something later            
+            string modified = String.Join(" ", origin.Split(new string[] { " " }, StringSplitOptions.RemoveEmptyEntries));
+            modified = modified.ToLower();
+            modified = Regex.Replace(modified, @"(^\w)|(\s\w)", m => m.Value.ToUpper());
+            return modified;
         }
     }
-
+    
+    //By Vu Pham Duc Thang
     class Move : StringOperation
     {
         public override string Name => "Move";

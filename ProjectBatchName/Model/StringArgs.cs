@@ -32,4 +32,6 @@ namespace ProjectBatchName.Model
 
         public int Mode { get => mode; set => mode = value; }
     }
+
+ 
 }
