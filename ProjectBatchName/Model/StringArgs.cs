@@ -25,4 +25,11 @@ namespace ProjectBatchName.Model
 
         public int Mode { get => mode; set => mode = value; }
     }
+
+    class MoveArgs: IStringArgs
+    {
+        int mode;
+
+        public int Mode { get => mode; set => mode = value; }
+    }
 }

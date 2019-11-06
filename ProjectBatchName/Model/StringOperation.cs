@@ -101,8 +101,29 @@ namespace ProjectBatchName.Model
 
         public override string Operate(string origin)
         {
-            return "";
-            //do it later.
+            var args = Args as MoveArgs;
+            string pattern = @"((978[\--– ])?[0-9][0-9\--– ]{10}[\--– ][0-9xX])|((978)?[0-9]{9}[0-9Xx])";
+            Regex myRegex = new Regex(pattern);
+            string ISBN = "";
+            foreach (Match match in myRegex.Matches(origin))
+            {
+                ISBN = match.ToString();
+                break;
+            }
+
+            //Not found ISBN in string
+            if (ISBN == "") return origin;
+            switch (args.Mode)
+            {
+                //Case 1: move to head of string
+                case 1:
+                    return ISBN + " " + origin.Replace(ISBN, "");
+
+                //Case 2: move to tail of string
+                case 2:
+                    return origin.Replace(ISBN, "") + " " + ISBN;
+            }
+            return origin;
 
         }
     }
