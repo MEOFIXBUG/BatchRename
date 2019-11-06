@@ -154,7 +154,7 @@
                                             <TextBlock Text="Add"/>
                                         </StackPanel>
                                     </Button>
-                                    <Button x:Name="DelSelectedItemButton"  Margin="5 0 5 0" Command="{Binding DelRowCommand}">
+                                    <Button x:Name="DelFileButton"  Margin="5 0 5 0" Command="{Binding DelFileCommand}">
                                         <StackPanel Orientation="Horizontal">
                                             <Image Source="/Images/icons8-delete-64.png" Height="16" Width="16" RenderOptions.BitmapScalingMode="HighQuality" Margin="0 0 2 0"/>
                                             <TextBlock Text="Del"/>
@@ -165,7 +165,7 @@
                                 </StackPanel>
                             </ToolBar>
                         </ToolBarTray>
-                        <DataGrid Name="FileTab" Background="Transparent" GridLinesVisibility="All" ItemsSource="{Binding fileInfoList}" AutoGenerateColumns="False">
+                        <DataGrid Name="FileTab" Background="Transparent" GridLinesVisibility="All" ItemsSource="{Binding fileInfoList}" SelectedItem="{Binding SelectedFile}" AutoGenerateColumns="False">
                             <DataGrid.Columns>
                                 <DataGridTextColumn Header="Filename" Width="150" Binding="{Binding Filename}"/>
                                 <DataGridTextColumn Header="New Filename" Width="150" Binding="{Binding Newfilename}"/>
@@ -191,22 +191,16 @@
                                             <TextBlock Text="Add"/>
                                         </StackPanel>
                                     </Button>
-                                    <Button  Width="20">
-                                        <Image Source="/Images/GoToTop_16x.png" Stretch="None"/>
-                                    </Button>
-                                    <Button  Width="20">
-                                        <Image Source="/Images/ExpandChevronUp_16x.png" Stretch="None"/>
-                                    </Button>
-                                    <Button  Width="20">
-                                        <Image Source="/Images/ExpandChevronDown_16x.png" Stretch="None"/>
-                                    </Button>
-                                    <Button  Width="20">
-                                        <Image Source="/Images/GoToBottom_16x.png" Stretch="None"/>
+                                    <Button x:Name="DelFolderButton"  Margin="5 0 5 0" Command="{Binding DelFolderCommand}">
+                                        <StackPanel Orientation="Horizontal">
+                                            <Image Source="/Images/icons8-delete-64.png" Height="16" Width="16" RenderOptions.BitmapScalingMode="HighQuality" Margin="0 0 2 0"/>
+                                            <TextBlock Text="Del"/>
+                                        </StackPanel>
                                     </Button>
                                 </StackPanel>
                             </ToolBar>
                         </ToolBarTray>
-                        <DataGrid Name="FolderTab" Background="Transparent" GridLinesVisibility="All" ItemsSource="{Binding folderInfoList}" AutoGenerateColumns="False" >
+                        <DataGrid Name="FolderTab" Background="Transparent" GridLinesVisibility="All" ItemsSource="{Binding folderInfoList}" SelectedItem="{Binding SelectedFolder}" AutoGenerateColumns="False" >
                             <DataGrid.Columns>
                                 <DataGridTextColumn Header="Foldername" Width="150" Binding="{Binding Foldername}"/>
                                 <DataGridTextColumn Header="New Foldername" Width="150" Binding="{Binding Newfoldername}"/>

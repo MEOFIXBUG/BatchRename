@@ -17,37 +17,60 @@ namespace ProjectBatchName.ViewModel
     public class MainViewModel : BaseViewModel
     {
         #region Properties
+        // [flag] start 
         public bool Isloaded = false;
+
+        // [flag] end
+        //[interface] start
         private readonly IFileService fileService;
         private readonly ILogic logic;
         private readonly IFolderService folderService;
+        //[interface] end
 
+        // [list data] start
         private ObservableCollection<fileInfo> _fileInfoList;
         public ObservableCollection<fileInfo> fileInfoList
         {
             get => _fileInfoList;
-            set { _fileInfoList = value; OnPropertyChanged(); }
+            set 
+            { _fileInfoList = value;
+                OnPropertyChanged();
+            }
         }
         private ObservableCollection<folderInfo> _folderInfoList;
         public ObservableCollection<folderInfo> folderInfoList
         {
             get => _folderInfoList;
-            set { _folderInfoList = value; OnPropertyChanged(); }
-        }
-        private fileInfo _SelectedItem;
-        public fileInfo SelectedItem
-        {
-            get => _SelectedItem;
-            set
-            {
-                _SelectedItem = value;
-                OnPropertyChanged();
-                if (SelectedItem != null)
-                {
-
-                }
+            set { 
+                _folderInfoList = value; 
+                OnPropertyChanged(); 
             }
         }
+        //[list data] end
+
+        //[selected item] start
+        private fileInfo _SelectedFile;
+        public fileInfo SelectedFile
+        {
+            get => _SelectedFile;
+            set
+            {
+                _SelectedFile = value;
+                OnPropertyChanged();
+            }
+        }
+
+        private folderInfo _SelectedFolder;
+        public folderInfo SelectedFolder
+        {
+            get => _SelectedFolder;
+            set
+            {
+                _SelectedFolder = value;
+                OnPropertyChanged();
+            }
+        }
+        //[selected item] end
         #endregion
 
         #region Contructor
@@ -56,16 +79,16 @@ namespace ProjectBatchName.ViewModel
         /// </summary>
         public MainViewModel()
         {
-            logic = Logic.Logic.Instance;
-            fileService = Services.File.FileService.Instance;
-            folderService = Services.Folder.FolderService.Instance;
             if (!Isloaded)
             {
                 Isloaded = true;
+                logic = Logic.Logic.Instance;
+                fileService = Services.File.FileService.Instance;
+                folderService = Services.Folder.FolderService.Instance;
                 //MessageBox.Show("Developed by MVVM");
+                fileInfoList = new ObservableCollection<fileInfo>();
+                folderInfoList = new ObservableCollection<folderInfo>();
             }
-            fileInfoList = new ObservableCollection<fileInfo>();
-            folderInfoList = new ObservableCollection<folderInfo>();
         }
         #endregion
 
@@ -112,6 +135,32 @@ namespace ProjectBatchName.ViewModel
             }
         }
         #endregion
+
+        #region DeleteFileCommand
+        private ICommand _delFileCommand;
+
+        public ICommand DelFileCommand
+        {
+            get
+            {
+                return _delFileCommand ??
+                     (_delFileCommand = new RelayCommand<object>(
+                         (p) => CanExecuteDelFileCommand(),
+                            (p) => ExecuteDelFileCommand()));
+            }
+        }
+
+        private bool CanExecuteDelFileCommand()
+        {
+            return (SelectedFile != null);
+        }
+
+        private void ExecuteDelFileCommand()
+        {
+            fileInfoList.Remove(SelectedFile);
+        }
+        #endregion
+
         #region AddForderCommand
         private ICommand _addFolderCommand;
         public ICommand AddFolderCommand
@@ -140,13 +189,45 @@ namespace ProjectBatchName.ViewModel
 
                 foreach (var dir in subDirectory)
                 {
-                    folderInfoList.Add(new folderInfo()
+                    var temp = new folderInfo();
+                    temp.Foldername = dir.Substring(directory.Length + 1);
+                    temp.Path = dir;
+                    if (folderService.IsExist(folderInfoList, temp) >= 0)
                     {
-                        Foldername = dir.Substring(directory.Length + 1),
-                        Path = dir
-                    });
+                        System.Windows.MessageBox.Show("Existed file");
+                    }
+                    else
+                    {
+                        folderInfoList.Add(temp);
+                    }
+
                 }
             }
+        }
+        #endregion
+
+        #region DeleteFolderCommand
+        private ICommand _delFolderCommand;
+
+        public ICommand DelFolderCommand
+        {
+            get
+            {
+                return _delFolderCommand ??
+                     (_delFolderCommand = new RelayCommand<object>(
+                         (p) => CanExecuteDelFolderCommand(),
+                            (p) => ExecuteDelFolderCommand()));
+            }
+        }
+
+        private bool CanExecuteDelFolderCommand()
+        {
+            return (SelectedFolder != null);
+        }
+
+        private void ExecuteDelFolderCommand()
+        {
+            folderInfoList.Remove(SelectedFolder);
         }
         #endregion
         #endregion
