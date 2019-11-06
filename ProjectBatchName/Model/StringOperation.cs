@@ -84,7 +84,7 @@ namespace ProjectBatchName.Model
     {
         public override string Name => "FullnameNormalize";
 
-        public override string Description => "the quick brown fox jump over the lazy dog";
+        public override string Description => "Normalize Full Name";
 
         public override string Operate(string origin)
         {
@@ -100,7 +100,20 @@ namespace ProjectBatchName.Model
     {
         public override string Name => "Move";
 
-        public override string Description => "Move What? How? Implemment later";
+        public override string Description
+        {
+            get
+            {
+                var args = Args as NewCaseArgs;
+                switch (args.Mode)
+                {
+                    case 1:
+                        return "Move ISBN to Start";
+                    default:
+                        return "Move ISBN to End";
+                }
+            }
+        }
 
         public override string Operate(string origin)
         {
@@ -123,11 +136,9 @@ namespace ProjectBatchName.Model
                     return ISBN + " " + origin.Replace(ISBN, "");
 
                 //Case 2: move to tail of string
-                case 2:
+                default:
                     return origin.Replace(ISBN, "") + " " + ISBN;
             }
-            return origin;
-
         }
     }
 
