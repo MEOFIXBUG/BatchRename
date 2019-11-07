@@ -6,7 +6,7 @@ using System.Threading.Tasks;
 
 namespace ProjectBatchName.Model
 {
-    interface IStringArgs
+    public interface IStringArgs
     {
     }
     

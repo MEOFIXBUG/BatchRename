@@ -45,14 +45,14 @@
             </ToolBarTray>
             <ToolBarTray>
                 <ToolBar x:Name="MethodBar" Height="30" Background="AliceBlue">
-                    <StackPanel Orientation="Horizontal" DataContext="{StaticResource MethodsVM}">
+                    <StackPanel Orientation="Horizontal">
                         <!--Methods-->
                         <Label Content="Method: "/>
                         <ComboBox Width="125" x:Name="methodComboBox" Height="20" 
                                   SelectedItem="{Binding SelectedOperation}"
                                   DisplayMemberPath="Name"
                                   FontWeight="Bold" Foreground="Red"
-                                  ItemsSource="{Binding Operations}" Margin="0,3,0,0" VerticalAlignment="Top">
+                                  ItemsSource="{Binding operationCollection}" Margin="0,3,0,0" VerticalAlignment="Top">
 
                         </ComboBox>
                         <Button  Margin="5,0,7,0" Name="AddMethodButton"    
@@ -116,10 +116,9 @@
             </Grid.ColumnDefinitions>
             
             <ListView Name="ActionListBox"
-                     DataContext="{StaticResource MethodsVM}"
-                     ItemsSource="{Binding SelectedOperations}"   
+                     ItemsSource="{Binding actionList}"   
                      SelectionMode="Extended"
-                     SelectedIndex="{Binding SelectedOperationIndex}"                     
+                     SelectedIndex="{Binding SelectedAction}"                     
                      Grid.Column="0" ScrollViewer.HorizontalScrollBarVisibility="Disabled">
                 <ListView.ContextMenu>
                     <ContextMenu>

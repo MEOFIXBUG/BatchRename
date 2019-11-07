@@ -7,7 +7,7 @@ using System.Threading.Tasks;
 
 namespace ProjectBatchName.Model
 {
-    abstract class StringOperation
+    public abstract class StringOperation
     {
         public StringOperation()
         {
