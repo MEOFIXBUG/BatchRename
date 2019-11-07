@@ -74,7 +74,7 @@ namespace ProjectBatchName.ViewModel
             operations.Add(new ReplaceOpertion() { Args = new ReplaceArgs() { From = "From", To = "To" } });
             operations.Add(new NewCaseOperation() { Args = new NewCaseArgs() { Mode = 3 } });
             operations.Add(new NewFullnameNormalize());
-            operations.Add(new Move());
+            operations.Add(new Move() { Args = new MoveArgs() { Mode = 1 } });
             operations.Add(new UniqueName());
 
             selectedOperations = new ObservableCollection<StringOperation>();

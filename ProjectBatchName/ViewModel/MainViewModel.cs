@@ -14,41 +14,54 @@ using System.IO;
 
 namespace ProjectBatchName.ViewModel
 {
-    public class MainViewModel : BaseViewModel
+    public sealed class MainViewModel : BaseViewModel
     {
         #region Properties
-        // [flag] start 
+        #region flag
+
         public bool Isloaded = false;
 
-        // [flag] end
-        //[interface] start
+        #endregion
+
+        #region interface
+
         private readonly IFileService fileService;
         private readonly ILogic logic;
         private readonly IFolderService folderService;
-        //[interface] end
 
-        // [list data] start
+        #endregion
+
+        #region Data
+        #region file
         private ObservableCollection<fileInfo> _fileInfoList;
         public ObservableCollection<fileInfo> fileInfoList
         {
             get => _fileInfoList;
-            set 
-            { _fileInfoList = value;
+            set
+            {
+                _fileInfoList = value;
                 OnPropertyChanged();
             }
         }
+        #endregion
+        #region folder
         private ObservableCollection<folderInfo> _folderInfoList;
         public ObservableCollection<folderInfo> folderInfoList
         {
             get => _folderInfoList;
-            set { 
-                _folderInfoList = value; 
-                OnPropertyChanged(); 
+            set
+            {
+                _folderInfoList = value;
+                OnPropertyChanged();
             }
         }
-        //[list data] end
+        #endregion
+        #region operation
+        #endregion
+        #endregion
 
-        //[selected item] start
+        #region Selected
+
         private fileInfo _SelectedFile;
         public fileInfo SelectedFile
         {
@@ -70,10 +83,13 @@ namespace ProjectBatchName.ViewModel
                 OnPropertyChanged();
             }
         }
-        //[selected item] end
+
+        #endregion
+
         #endregion
 
         #region Contructor
+
         /// <summary>
         /// Constructor MainViewModel
         /// </summary>
@@ -81,18 +97,22 @@ namespace ProjectBatchName.ViewModel
         {
             if (!Isloaded)
             {
+                //MessageBox.Show("Developed by MVVM");
                 Isloaded = true;
                 logic = Logic.Logic.Instance;
                 fileService = Services.File.FileService.Instance;
                 folderService = Services.Folder.FolderService.Instance;
-                //MessageBox.Show("Developed by MVVM");
                 fileInfoList = new ObservableCollection<fileInfo>();
                 folderInfoList = new ObservableCollection<folderInfo>();
+               
             }
         }
+
         #endregion
 
         #region Command
+
+        #region File Command
         #region AddFileCommand
         private ICommand _addFileCommand;
         public ICommand AddFilesCommand
@@ -160,7 +180,9 @@ namespace ProjectBatchName.ViewModel
             fileInfoList.Remove(SelectedFile);
         }
         #endregion
+        #endregion
 
+        #region Folder Command
         #region AddForderCommand
         private ICommand _addFolderCommand;
         public ICommand AddFolderCommand
@@ -194,7 +216,7 @@ namespace ProjectBatchName.ViewModel
                     temp.Path = dir;
                     if (folderService.IsExist(folderInfoList, temp) >= 0)
                     {
-                        System.Windows.MessageBox.Show("Existed file");
+                        System.Windows.MessageBox.Show("Existed folder");
                     }
                     else
                     {
@@ -230,6 +252,8 @@ namespace ProjectBatchName.ViewModel
             folderInfoList.Remove(SelectedFolder);
         }
         #endregion
+        #endregion
+
         #endregion
 
     }

@@ -104,7 +104,7 @@ namespace ProjectBatchName.Model
         {
             get
             {
-                var args = Args as NewCaseArgs;
+                var args = Args as MoveArgs;
                 switch (args.Mode)
                 {
                     case 1:
