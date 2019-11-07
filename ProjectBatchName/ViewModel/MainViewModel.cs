@@ -11,10 +11,11 @@ using ProjectBatchName.Logic;
 using ProjectBatchName.Services.File;
 using ProjectBatchName.Services.Folder;
 using System.IO;
+using System.ComponentModel;
 
 namespace ProjectBatchName.ViewModel
 {
-    public sealed class MainViewModel : BaseViewModel
+    public class MainViewModel : BaseViewModel
     {
         #region Properties
         #region flag
@@ -44,6 +45,7 @@ namespace ProjectBatchName.ViewModel
             }
         }
         #endregion
+
         #region folder
         private ObservableCollection<folderInfo> _folderInfoList;
         public ObservableCollection<folderInfo> folderInfoList
@@ -56,11 +58,28 @@ namespace ProjectBatchName.ViewModel
             }
         }
         #endregion
+
         #region operation
+        public ObservableCollection<StringOperation> operationCollection { get; set; }
         #endregion
+
+        #region action
+        private ObservableCollection<StringOperation> _actionList;
+        public ObservableCollection<StringOperation> actionList
+        {
+            get => _actionList;
+            set
+            {
+                _actionList = value;
+                OnPropertyChanged();
+            }
+        }
+        #endregion
+
         #endregion
 
         #region Selected
+        #region S_file
 
         private fileInfo _SelectedFile;
         public fileInfo SelectedFile
@@ -72,6 +91,9 @@ namespace ProjectBatchName.ViewModel
                 OnPropertyChanged();
             }
         }
+        #endregion
+
+        #region S_folder
 
         private folderInfo _SelectedFolder;
         public folderInfo SelectedFolder
@@ -83,9 +105,41 @@ namespace ProjectBatchName.ViewModel
                 OnPropertyChanged();
             }
         }
-
         #endregion
 
+        #region S_operation
+        private StringOperation _SelectedOperation;
+        public StringOperation SelectedOperation
+        {
+            get => _SelectedOperation;
+            set
+            {
+                _SelectedOperation = value;
+                OnPropertyChanged();
+                actionList.Add(_SelectedOperation);  // unnecessary
+            }
+        }
+        #endregion
+
+        #region S_action
+        private int _SelectedAction = -1;
+        public int SelectedAction
+        {
+            get
+            {
+                return _SelectedAction;
+            }
+            set
+            {
+                _SelectedAction = value;
+                OnPropertyChanged();
+                //MessageBox.Show(selectedOperationIndex.ToString());
+                //SelectedOperations.RemoveAt(selectedOperationIndex);
+            }
+        }
+        #endregion
+
+        #endregion
         #endregion
 
         #region Contructor
@@ -104,7 +158,13 @@ namespace ProjectBatchName.ViewModel
                 folderService = Services.Folder.FolderService.Instance;
                 fileInfoList = new ObservableCollection<fileInfo>();
                 folderInfoList = new ObservableCollection<folderInfo>();
-               
+                operationCollection = new ObservableCollection<StringOperation>();
+                operationCollection.Add(new ReplaceOpertion() { Args = new ReplaceArgs() { From = "From", To = "To" } });
+                operationCollection.Add(new NewCaseOperation() { Args = new NewCaseArgs() { Mode = 3 } });
+                operationCollection.Add(new NewFullnameNormalize());
+                operationCollection.Add(new Move() { Args = new MoveArgs() { Mode = 1 } });
+                operationCollection.Add(new UniqueName());
+                actionList = new ObservableCollection<StringOperation>();
             }
         }
 
@@ -252,6 +312,56 @@ namespace ProjectBatchName.ViewModel
             folderInfoList.Remove(SelectedFolder);
         }
         #endregion
+        #endregion
+
+        #region Method Command
+
+        #region AddMethod
+        private ICommand _addOperationCommand;
+        public ICommand AddOperationCommand
+        {
+            get
+            {
+                return _addOperationCommand ??
+                     (_addOperationCommand = new RelayCommand<object>(
+                         (p) => CanExecuteAddOperationCommand(),
+                            (p) => ExecuteAddOperationCommand()));
+            }
+        }
+        private bool CanExecuteAddOperationCommand()
+        {
+            return SelectedOperation == null ? false : true;
+        }
+
+        private void ExecuteAddOperationCommand()
+        {
+            actionList.Add(SelectedOperation);
+        }
+        #endregion
+
+        #region DelMethod
+        
+        private ICommand _deleteOperationCommand;
+        public ICommand DeleteOperationCommand
+        {
+            get
+            {
+                return _deleteOperationCommand ??
+                     (_deleteOperationCommand = new RelayCommand<object>(
+                         (p) => CanExecuteDeleteOperationCommand(),
+                            (p) => ExecuteDeleteOperationCommand()));
+            }
+        }
+        private void ExecuteDeleteOperationCommand()
+        {
+            actionList.RemoveAt(SelectedAction);
+        }
+        private bool CanExecuteDeleteOperationCommand()
+        {
+            return SelectedAction < 0 ? false : true;
+        }
+        #endregion
+
         #endregion
 
         #endregion

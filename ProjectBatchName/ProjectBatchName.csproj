@@ -58,10 +58,10 @@
     </ApplicationDefinition>
     <Compile Include="Logic\ILogic.cs" />
     <Compile Include="Logic\Logic.cs" />
-    <Compile Include="Model\fileInfo.cs" />
-    <Compile Include="Model\folderInfo.cs" />
-    <Compile Include="Model\StringArgs.cs" />
-    <Compile Include="Model\StringOperation.cs" />
+    <Compile Include="Model\Domain Object\fileInfo.cs" />
+    <Compile Include="Model\Domain Object\folderInfo.cs" />
+    <Compile Include="Model\System Object\StringArgs.cs" />
+    <Compile Include="Model\System Object\StringOperation.cs" />
     <Compile Include="Services\File\FileService.cs" />
     <Compile Include="Services\File\IFileService.cs" />
     <Compile Include="Services\Folder\FolderService.cs" />
