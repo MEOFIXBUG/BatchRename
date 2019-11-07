@@ -165,14 +165,17 @@
                                 </StackPanel>
                             </ToolBar>
                         </ToolBarTray>
-                        <DataGrid Name="FileTab" Background="Transparent" GridLinesVisibility="All" ItemsSource="{Binding fileInfoList}" SelectedItem="{Binding SelectedFile}" AutoGenerateColumns="False">
-                            <DataGrid.Columns>
-                                <DataGridTextColumn Header="Filename" Width="150" Binding="{Binding Filename}"/>
-                                <DataGridTextColumn Header="New Filename" Width="150" Binding="{Binding Newfilename}"/>
-                                <DataGridTextColumn Header="Path" Width="150" Binding="{Binding Path}"/>
-                                <DataGridTextColumn Header="Error" Width="*" Binding="{Binding Error}"/>
-                            </DataGrid.Columns>
-                        </DataGrid>
+                        
+                                <DataGrid Name="FileTab" Height="300" Background="Transparent" GridLinesVisibility="All" ItemsSource="{Binding fileInfoList}" SelectedItem="{Binding SelectedFile}" AutoGenerateColumns="False" ScrollViewer.CanContentScroll="True" ScrollViewer.VerticalScrollBarVisibility="Auto">
+                                    <DataGrid.Columns>
+                                        <DataGridTextColumn Header="Filename" Width="150" Binding="{Binding Filename}"/>
+                                        <DataGridTextColumn Header="New Filename" Width="150" Binding="{Binding Newfilename}"/>
+                                        <DataGridTextColumn Header="Path" Width="150" Binding="{Binding Path}"/>
+                                        <DataGridTextColumn Header="Error" Width="*" Binding="{Binding Error}"/>
+                                    </DataGrid.Columns>
+                                </DataGrid>
+
+                        
                     </StackPanel>
                 </TabItem>
                 <TabItem>
@@ -200,7 +203,7 @@
                                 </StackPanel>
                             </ToolBar>
                         </ToolBarTray>
-                        <DataGrid Name="FolderTab" Background="Transparent" GridLinesVisibility="All" ItemsSource="{Binding folderInfoList}" SelectedItem="{Binding SelectedFolder}" AutoGenerateColumns="False" >
+                        <DataGrid Name="FolderTab" Background="Transparent" Height ="300" GridLinesVisibility="All" ItemsSource="{Binding folderInfoList}" SelectedItem="{Binding SelectedFolder}" AutoGenerateColumns="False" ScrollViewer.CanContentScroll="True" ScrollViewer.VerticalScrollBarVisibility="Auto">
                             <DataGrid.Columns>
                                 <DataGridTextColumn Header="Foldername" Width="150" Binding="{Binding Foldername}"/>
                                 <DataGridTextColumn Header="New Foldername" Width="150" Binding="{Binding Newfoldername}"/>
