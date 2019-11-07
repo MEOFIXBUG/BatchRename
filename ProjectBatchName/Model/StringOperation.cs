@@ -150,8 +150,7 @@ namespace ProjectBatchName.Model
 
         public override string Operate(string origin)
         {
-            return "Nguyen Hoang Phuc";
-            //do it later.
+            return Guid.NewGuid().ToString();
         }
     }
 }
