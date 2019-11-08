@@ -31,8 +31,8 @@
                                 <TextBlock Text=" Help" FontSize="12"></TextBlock>
                             </StackPanel>
                         </Button>
-                        <Button  Height="20" Margin="5,0,10,0" HorizontalAlignment="Center" VerticalAlignment="Center" 
-                                 Name="StartBatchButton" >
+                        <Button  Command="{Binding ExcuteActionCommand}" Height="20" Margin="5,0,10,0" HorizontalAlignment="Center" VerticalAlignment="Center" 
+                                 Name="StartBatchButton"  >
                             <StackPanel Orientation="Horizontal" VerticalAlignment="Center" HorizontalAlignment="Center">
                                 <Image Source="/Images/start.png" Height="16" Width="16" RenderOptions.BitmapScalingMode="HighQuality"/>
                                 <TextBlock Text=" START BATCH" FontSize="12"></TextBlock>
@@ -153,19 +153,18 @@
                                             <TextBlock Text="Add"/>
                                         </StackPanel>
                                     </Button>
-                                    <Button x:Name="DelFileButton"  Margin="5 0 5 0" Command="{Binding DelFileCommand}">
+                                    <Button x:Name="DelFileButton"  Margin="5 0 20 0" Command="{Binding DelFileCommand}">
                                         <StackPanel Orientation="Horizontal">
                                             <Image Source="/Images/icons8-delete-64.png" Height="16" Width="16" RenderOptions.BitmapScalingMode="HighQuality" Margin="0 0 2 0"/>
                                             <TextBlock Text="Del"/>
                                         </StackPanel>
                                     </Button>
-
-
+                                    
                                 </StackPanel>
                             </ToolBar>
                         </ToolBarTray>
                         
-                                <DataGrid Name="FileTab" Height="300" Background="Transparent" GridLinesVisibility="All" ItemsSource="{Binding fileInfoList}" SelectedItem="{Binding SelectedFile}" AutoGenerateColumns="False" ScrollViewer.CanContentScroll="True" ScrollViewer.VerticalScrollBarVisibility="Auto">
+                                <DataGrid Name="FileTab" Height="276" Background="Transparent" GridLinesVisibility="All" ItemsSource="{Binding fileInfoList, UpdateSourceTrigger=PropertyChanged}"  SelectedItem="{Binding SelectedFile}" AutoGenerateColumns="False" ScrollViewer.CanContentScroll="True" ScrollViewer.VerticalScrollBarVisibility="Auto">
                                     <DataGrid.Columns>
                                         <DataGridTextColumn Header="Filename" Width="150" Binding="{Binding Filename}"/>
                                         <DataGridTextColumn Header="New Filename" Width="150" Binding="{Binding Newfilename}"/>
@@ -193,18 +192,19 @@
                                             <TextBlock Text="Add"/>
                                         </StackPanel>
                                     </Button>
-                                    <Button x:Name="DelFolderButton"  Margin="5 0 5 0" Command="{Binding DelFolderCommand}">
+                                    <Button x:Name="DelFolderButton"  Margin="5 0 20 0" Command="{Binding DelFolderCommand}">
                                         <StackPanel Orientation="Horizontal">
                                             <Image Source="/Images/icons8-delete-64.png" Height="16" Width="16" RenderOptions.BitmapScalingMode="HighQuality" Margin="0 0 2 0"/>
                                             <TextBlock Text="Del"/>
                                         </StackPanel>
                                     </Button>
+                                    
                                 </StackPanel>
                             </ToolBar>
                         </ToolBarTray>
                         <DataGrid Name="FolderTab" Background="Transparent" Height ="300" GridLinesVisibility="All" ItemsSource="{Binding folderInfoList}" SelectedItem="{Binding SelectedFolder}" AutoGenerateColumns="False" ScrollViewer.CanContentScroll="True" ScrollViewer.VerticalScrollBarVisibility="Auto">
                             <DataGrid.Columns>
-                                <DataGridTextColumn Header="Foldername" Width="150" Binding="{Binding Foldername}"/>
+                                <DataGridTextColumn Header="Foldername" Width="150" Binding="{Binding Foldername }"/>
                                 <DataGridTextColumn Header="New Foldername" Width="150" Binding="{Binding Newfoldername}"/>
                                 <DataGridTextColumn Header="Folder Path" Width="150" Binding="{Binding Path}"/>
                                 <DataGridTextColumn Header="Errro" Width="*" Binding="{Binding Error}"/>

@@ -11,5 +11,6 @@ namespace ProjectBatchName.Services.File
     public interface IFileService
     {
         int IsExist(ObservableCollection<fileInfo> fList, fileInfo f);
+        ObservableCollection<fileInfo> CopyAll(ObservableCollection<fileInfo> fList);
     }
 }

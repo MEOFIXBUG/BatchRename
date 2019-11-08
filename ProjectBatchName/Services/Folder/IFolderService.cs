@@ -11,5 +11,6 @@ namespace ProjectBatchName.Services.Folder
     public interface IFolderService
     {
         int IsExist(ObservableCollection<folderInfo> fList, folderInfo f);
+        ObservableCollection<folderInfo> CopyAll(ObservableCollection<folderInfo> fList);
     }
 }

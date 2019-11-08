@@ -2,6 +2,7 @@
 using System;
 using System.Collections.Generic;
 using System.Collections.ObjectModel;
+using System.IO;
 using System.Linq;
 using System.Text;
 using System.Threading.Tasks;
@@ -22,6 +23,15 @@ namespace ProjectBatchName.Services.File
                 }
             }
             return i;
+        }
+        public ObservableCollection<fileInfo> CopyAll(ObservableCollection<fileInfo> fList)
+        {
+            ObservableCollection<fileInfo> result=new ObservableCollection<fileInfo>();
+            foreach (var item in fList)
+            {
+                    result.Add(item);
+            }
+            return result;
         }
 
     }
