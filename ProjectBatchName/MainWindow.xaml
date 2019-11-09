@@ -138,7 +138,7 @@
                         <DataTemplate>
                             <StackPanel Orientation="Vertical">
                                 <TextBlock Text="{Binding Name}" FontFamily="Comic Sans MS" FontWeight="Bold" Foreground="Red"/>
-                               
+                                <TextBlock Text="{Binding Args.Description}"/>
                             </StackPanel>
                         </DataTemplate>
                     </ListBox.ItemTemplate>

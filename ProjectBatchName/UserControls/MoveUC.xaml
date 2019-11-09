@@ -13,12 +13,14 @@
             <local:RadioBoolToIntConverter x:Key="radioButtonConverter"/>
         </Grid.Resources>
         <StackPanel>
-            <RadioButton Name="button1" Content="Move to start" IsChecked="{Binding MoveArgs.Mode, Converter={StaticResource radioButtonConverter}, ConverterParameter=1}"></RadioButton>
-            <RadioButton Name="button2" Content="Move to end" IsChecked="{Binding MoveArgs.Mode, Converter={StaticResource radioButtonConverter}, ConverterParameter=2}"></RadioButton>
             <StackPanel>
-                <TextBlock Text="Length:" Width="50" Height="25"></TextBlock>
-                <TextBox Text="{Binding MoveArgs.Length, Converter={StaticResource stringConverter}}" ></TextBox>
+                <RadioButton Name="button1" Content="Move to start" IsChecked="{Binding MoveArgs.Mode, Converter={StaticResource radioButtonConverter}, ConverterParameter=1}"></RadioButton>
+                <RadioButton Name="button2" Content="Move to end" IsChecked="{Binding MoveArgs.Mode, Converter={StaticResource radioButtonConverter}, ConverterParameter=2}"></RadioButton>
             </StackPanel>
+
+            <TextBlock Text="Length:" Width="50" Height="25"></TextBlock>
+            <TextBox Text="{Binding MoveArgs.Length, Converter={StaticResource stringConverter}}" ></TextBox>
+
         </StackPanel>
     </Grid>
 </local:BaseUserControl>

@@ -60,3 +60,7 @@ C:\Users\hoang\Desktop\BatchRename\ProjectBatchName\obj\Debug\UserControls\FullN
 C:\Users\hoang\Desktop\BatchRename\ProjectBatchName\obj\Debug\UserControls\UniqueName.g.cs
 C:\Users\hoang\Desktop\BatchRename\ProjectBatchName\obj\Debug\UserControls\FullNameNormalizeUC.baml
 C:\Users\hoang\Desktop\BatchRename\ProjectBatchName\obj\Debug\UserControls\UniqueName.baml
+C:\Users\hoang\Desktop\BatchRename\ProjectBatchName\obj\Debug\DuplicateProcess.g.cs
+C:\Users\hoang\Desktop\BatchRename\ProjectBatchName\obj\Debug\Preview.g.cs
+C:\Users\hoang\Desktop\BatchRename\ProjectBatchName\obj\Debug\DuplicateProcess.baml
+C:\Users\hoang\Desktop\BatchRename\ProjectBatchName\obj\Debug\Preview.baml

@@ -21,11 +21,11 @@
             <RadioButton Name="button2" IsChecked="{Binding NewCaseArgs.Mode,
                 Converter={StaticResource radioBoolToIntConverter},
                 ConverterParameter=2}"
-                         Content="Lower case" />
+                         Content="Upper case" />
             <RadioButton Name="button3" IsChecked="{Binding NewCaseArgs.Mode,
                 Converter={StaticResource radioBoolToIntConverter},
                 ConverterParameter=3}"
-                         Content="Lower case" />
+                         Content="Capitalize case" />
         </StackPanel>
     </Grid>
 </local:BaseUserControl>

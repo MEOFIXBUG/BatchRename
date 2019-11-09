@@ -27,12 +27,12 @@ namespace ProjectBatchName.UserControls
         }
         public MoveArgs MoveArgs
         {
-            get { return (MoveArgs)GetValue(ArgsProperty); }
-            set { SetValue(ArgsProperty, value); }
+            get { return (MoveArgs)GetValue(MoveArgsProperty); }
+            set { SetValue(MoveArgsProperty, value); }
         }
 
         // Using a DependencyProperty as the backing store for Args.  This enables animation, styling, binding, etc...
-        public static readonly DependencyProperty ArgsProperty =
+        public static readonly DependencyProperty MoveArgsProperty =
             DependencyProperty.Register("MoveArgs", typeof(MoveArgs), typeof(MoveUC), null);
 
         private void BaseUserControl_Loaded(object sender, RoutedEventArgs e)

@@ -14,10 +14,8 @@ namespace ProjectBatchName.Model
         {
 
         }
-        private IStringArgs args;
-        public IStringArgs Args { get { return args; } set { args = value; OnPropertyChanged(); OnPropertyChanged("Description"); } }
+        public IStringArgs Args { get; set; }
         public abstract string Name { get; }
-        public abstract string Description { get; }
 
         public abstract string Operate(string origin);
         public abstract StringOperation Clone();
@@ -28,15 +26,6 @@ namespace ProjectBatchName.Model
         public override string Name
         {
             get { return "Replace"; }
-        }
-
-        public override string Description
-        {
-            get
-            {
-                var args = Args as ReplaceArgs;
-                return $"Replace from {args.From} to {args.To}";
-            }
         }
 
         public override StringOperation Clone()
@@ -65,22 +54,6 @@ namespace ProjectBatchName.Model
     {
         public override string Name => "New Case";
 
-        public override string Description
-        {
-            get
-            {
-                var args = Args as NewCaseArgs;
-                switch (args.Mode)
-                {
-                    case 1:
-                        return "Convert to lowercase";
-                    case 2:
-                        return "Convert to upercase";
-                    default:
-                        return "Convert to capitalize case";
-                }
-            }
-        }
 
         public override StringOperation Clone()
         {
@@ -116,11 +89,9 @@ namespace ProjectBatchName.Model
     {
         public override string Name => "FullnameNormalize";
 
-        public override string Description => "Normalize Full Name";
-
         public override StringOperation Clone()
         {
-            return new NewFullnameNormalize();
+            return new NewFullnameNormalize() { Args = new NewFullNameNormalizeArgs() };
         }
 
         public override string Operate(string origin)
@@ -137,20 +108,6 @@ namespace ProjectBatchName.Model
     {
         public override string Name => "Move";
 
-        public override string Description
-        {
-            get
-            {
-                var args = Args as MoveArgs;
-                switch (args.Mode)
-                {
-                    case 1:
-                        return "Move ISBN to Start";
-                    default:
-                        return "Move ISBN to End";
-                }
-            }
-        }
 
         public override StringOperation Clone()
         {
@@ -160,7 +117,7 @@ namespace ProjectBatchName.Model
                 Args = new MoveArgs()
                 {
                     Mode = args.Mode
-                 }
+                }
             };
         }
 
@@ -194,12 +151,10 @@ namespace ProjectBatchName.Model
     class UniqueName : StringOperation
     {
         public override string Name => "Unique Name";
-
-        public override string Description => "Use GUID to set an unique name";
-
+        
         public override StringOperation Clone()
         {
-            return new UniqueName();
+            return new UniqueName() { Args = new UniqueNameArgs() };
         }
 
         public override string Operate(string origin)

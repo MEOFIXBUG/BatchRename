@@ -13,6 +13,7 @@ using ProjectBatchName.Services.Folder;
 using System.IO;
 using System.ComponentModel;
 using ProjectBatchName.Common;
+using System.Windows.Forms;
 
 namespace ProjectBatchName.ViewModel
 {
@@ -166,11 +167,11 @@ namespace ProjectBatchName.ViewModel
                 
                 folderInfoList = new ObservableCollection<folderInfo>();
                 operationCollection = new ObservableCollection<StringOperation>();
-                operationCollection.Add(new ReplaceOpertion() { Args = new ReplaceArgs() { From = "b", To = "" } });
+                operationCollection.Add(new ReplaceOpertion() { Args = new ReplaceArgs() { From = "From", To = "To" } });
                 operationCollection.Add(new NewCaseOperation() { Args = new NewCaseArgs() { Mode = 3 } });
-                operationCollection.Add(new NewFullnameNormalize());
+                operationCollection.Add(new NewFullnameNormalize() { Args = new NewFullNameNormalizeArgs() }); ;
                 operationCollection.Add(new Move() { Args = new MoveArgs() { Mode = 1 } });
-                operationCollection.Add(new UniqueName());
+                operationCollection.Add(new UniqueName() { Args = new UniqueNameArgs()});
                 actionList = new ObservableCollection<StringOperation>();
             }
         }
@@ -199,12 +200,12 @@ namespace ProjectBatchName.ViewModel
 
         private void ExecuteAddFileCommand()
         {
-            var screen = new System.Windows.Forms.FolderBrowserDialog();
+            var screen = new OpenFileDialog();
+            screen.Multiselect = true;
             if (screen.ShowDialog() == System.Windows.Forms.DialogResult.OK)
             {
-                string directory = screen.SelectedPath;
-                var Listfile = Directory.GetFiles(directory);
-                foreach (var file in Listfile)
+                var listFile = screen.FileNames;
+                foreach (var file in listFile)
                 {
                     var temp = new fileInfo();
                     temp.Filename = Path.GetFileName(file);
