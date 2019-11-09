@@ -42,7 +42,7 @@ namespace ProjectBatchName.ViewModel
             set
             {
                 _fileInfoList = value;
-                OnPropertyChanged("fileInfoList");
+                OnPropertyChanged("fi-leInfoList");
             }
         }
         #endregion
@@ -401,29 +401,76 @@ namespace ProjectBatchName.ViewModel
             ObservableCollection<fileInfo> DuplicateFiles = new ObservableCollection<fileInfo>();
             ObservableCollection<folderInfo> DuplicateFolders = new ObservableCollection<folderInfo>();
             bool isDuplicate = false;
-            var Temp = fileService.CopyAll(fileInfoList);
-            foreach (var file in Temp)
+            //_____________file
+            var Temp1 = fileService.CopyAll(fileInfoList);
+            foreach (var item in Temp1)
             {
-                string result = file.Filename;
+                string result = item.Filename;
                 foreach (var action in actionList)
                 {
                     result = action.Operate(result);
                 }
-                var path = Path.GetDirectoryName(file.Path);
+                var path = Path.GetDirectoryName(item.Path);
                 try
                 {
-                    var tempfile = new FileInfo(file.Path);
+                    var tempfile = new FileInfo(item.Path);
                     tempfile.MoveTo(path + "\\" + result);
-                    file.Newfilename = result;
+                    item.Newfilename = result;
                 }
                 catch (Exception ex)
                 {
                     isDuplicate = true;
-                    file.Newfilename = result;
-                    file.Error = "Duplicate";
-                    DuplicateFiles.Add(file);
+                    item.Newfilename = result;
+                    item.Error = "Duplicate";
+                    DuplicateFiles.Add(item);
                 }
             }
+
+            //_____________folder
+            var Temp2 = folderService.CopyAll(folderInfoList);
+            int next = 0;
+            foreach (var item in Temp2)
+            {
+                string result = item.Foldername;
+
+                foreach (var action in actionList)
+                {
+                    result = action.Operate(result);
+                }
+                string newfolderpath = Path.GetDirectoryName(item.Path) + "\\" + result;
+                string tempFolderName = "\\Temp";
+                string tempFolderPath = Path.GetDirectoryName(item.Path) + tempFolderName;
+                CopyAll(item.Path, tempFolderPath, true);
+
+                if (item.Path.Equals(newfolderpath) == false)
+                {
+                    RemoveDirectory(item.Path);
+                    Directory.Delete(item.Path);
+                    try
+                    {
+                        Directory.Move(tempFolderPath, newfolderpath);
+                        item.Newfoldername = result;
+                        item.Error = "OK";
+                    }
+                    catch (Exception ex) 
+                    {
+                        string duplicatestore = Path.GetDirectoryName(item.Path) + "\\Store" + $"{++next}";
+                        CopyAll(tempFolderPath, duplicatestore, true);
+                        RemoveDirectory(tempFolderPath);
+                        Directory.Delete(tempFolderPath);
+                        isDuplicate = true;
+                        item.Newfoldername = result;
+                        item.Error = "Duplicate Foldername";
+                        DuplicateFolders.Add(item);
+                    }
+                }
+                else
+                {
+                    RemoveDirectory(tempFolderPath);
+                    Directory.Delete(tempFolderPath);
+                }
+            }
+
             if (isDuplicate == true)
             {
                 DuplicateProcess dupWin = new DuplicateProcess(DuplicateFiles, DuplicateFolders);
@@ -432,9 +479,57 @@ namespace ProjectBatchName.ViewModel
             Preview previewWin = new Preview(fileInfoList,folderInfoList);
             previewWin.ShowDialog();
             fileInfoList.Clear();
-            fileInfoList = fileService.CopyAll(Temp);
+            fileInfoList = fileService.CopyAll(Temp1);
             OnPropertyChanged("fileInfoList");
-           
+            folderInfoList.Clear();
+            folderInfoList = folderService.CopyAll(Temp2);
+            OnPropertyChanged("folderInfoList");
+
+        }
+
+        public static void CopyAll(string sourceDirName, string destDirName, bool copySubDirs)
+        {
+            DirectoryInfo dir = new DirectoryInfo(sourceDirName);
+            if (!dir.Exists)
+            {
+                System.Windows.MessageBox.Show("Source Directory does not exist or could not be found !");
+            }
+
+            if (!Directory.Exists(destDirName))
+            {
+                DirectoryInfo tempFolder = Directory.CreateDirectory(destDirName);
+            }
+
+            FileInfo[] files = dir.GetFiles();
+            foreach (FileInfo file in files)
+            {
+                string temppath = System.IO.Path.Combine(destDirName, file.Name);
+                file.CopyTo(temppath, false);
+            }
+
+            DirectoryInfo[] dirs = dir.GetDirectories();
+            if (copySubDirs)
+            {
+                foreach (DirectoryInfo subdir in dirs)
+                {
+                    string temppath = System.IO.Path.Combine(destDirName, subdir.Name);
+                    CopyAll(subdir.FullName, temppath, copySubDirs);
+                }
+            }
+        }
+
+        public static void RemoveDirectory(string sourcePath)
+        {
+            DirectoryInfo src = new DirectoryInfo(sourcePath);
+
+            foreach (var file in src.GetFiles())
+            {
+                file.Delete();
+            }
+            foreach (var dir in src.GetDirectories())
+            {
+                dir.Delete(true);
+            }
         }
         #endregion
         #endregion

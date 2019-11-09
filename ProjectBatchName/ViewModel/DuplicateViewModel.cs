@@ -100,29 +100,32 @@ namespace ProjectBatchName.ViewModel
                 foreach (var item in Temp1)
                 {
                     string newfilePath = item.Path;
-                    int next = 1;
+                    int prefix = 1;
                     do
                     {
-                        item.Newfilename = item.Newfilename.Insert(item.Newfilename.IndexOf(Path.GetExtension(item.Newfilename), 1), next.ToString());
+                        item.Newfilename = item.Newfilename.Insert(item.Newfilename.IndexOf(Path.GetExtension(item.Newfilename), 1), prefix.ToString());
                         newfilePath = System.IO.Path.GetDirectoryName(item.Path) + "'\\" + item.Newfilename;
-                        next++;
+                        prefix++;
                     } while (System.IO.File.Exists(newfilePath));
                     var tempfile = new FileInfo(item.Path);
                     tempfile.MoveTo(System.IO.Path.GetDirectoryName(item.Path) + "\\" + item.Newfilename);
                 }
                 var Temp2 = folderService.CopyAll(DuplicateFolders);
+                int next = 0;
                 foreach (var item in Temp2)
                 {
                     string newfolderpath = System.IO.Path.GetDirectoryName(item.Path) + "\\" + item.Newfoldername;
-                    int next = 1;
+                    string newfoldername = "";
                     while (System.IO.Directory.Exists(newfolderpath))
                     {
-                        item.Newfoldername = item.Newfoldername  + $"{next}";
-                        newfolderpath = System.IO.Path.GetDirectoryName(item.Path) + "\\" + item.Newfoldername;
-                        next++;
+                        ++next;
+                        newfoldername = item.Newfoldername +  $"{next}" ;
+                        newfolderpath = System.IO.Path.GetDirectoryName(item.Path) + "\\" + newfoldername;
                     }
-                    DirectoryInfo dir = new DirectoryInfo(item.Path);
-                    dir.MoveTo(System.IO.Path.GetDirectoryName(item.Path) + "\\" + item.Newfoldername);
+                    string tempFolderPath = System.IO.Path.GetDirectoryName(item.Path) + "\\Store" + $"{next}";
+                    item.Newfoldername = newfoldername;
+                    item.Error = "OK";
+                    Directory.Move(tempFolderPath, newfolderpath);
                 }
 
                 DuplicateFiles.Clear();
