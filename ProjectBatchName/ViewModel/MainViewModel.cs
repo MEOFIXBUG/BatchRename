@@ -67,7 +67,7 @@ namespace ProjectBatchName.ViewModel
 
         #region Duplicate
         public ObservableCollection<string> DuplicateCollection { get; set; }
-        
+
         #endregion
 
         #region action
@@ -123,7 +123,7 @@ namespace ProjectBatchName.ViewModel
             {
                 _SelectedOperation = value;
                 OnPropertyChanged();
-               //actionList.Add(_SelectedOperation.Clone());  // unnecessary
+                //actionList.Add(_SelectedOperation.Clone());  // unnecessary
             }
         }
         #endregion
@@ -164,14 +164,14 @@ namespace ProjectBatchName.ViewModel
                 fileService = Services.File.FileService.Instance;
                 folderService = Services.Folder.FolderService.Instance;
                 fileInfoList = new ObservableCollection<fileInfo>();
-                
+
                 folderInfoList = new ObservableCollection<folderInfo>();
                 operationCollection = new ObservableCollection<StringOperation>();
                 operationCollection.Add(new ReplaceOpertion() { Args = new ReplaceArgs() { From = "From", To = "To" } });
                 operationCollection.Add(new NewCaseOperation() { Args = new NewCaseArgs() { Mode = 3 } });
                 operationCollection.Add(new NewFullnameNormalize() { Args = new NewFullNameNormalizeArgs() }); ;
                 operationCollection.Add(new Move() { Args = new MoveArgs() { Mode = 1 } });
-                operationCollection.Add(new UniqueName() { Args = new UniqueNameArgs()});
+                operationCollection.Add(new UniqueName() { Args = new UniqueNameArgs() });
                 actionList = new ObservableCollection<StringOperation>();
             }
         }
@@ -486,7 +486,7 @@ namespace ProjectBatchName.ViewModel
                     }
                     if (tokens[i] == "4")
                     {
-                        actionList.Add(new NewFullnameNormalize() { Args = new NewFullNameNormalizeArgs() });
+                        actionList.Add(new NewFullnameNormalize() { Args = new NewFullNameNormalizeArgs()});
                         i += 1;
                         continue;
                     }
@@ -538,7 +538,7 @@ namespace ProjectBatchName.ViewModel
                 try
                 {
                     var tempfile = new FileInfo(item.Path);
-                    tempfile.MoveTo(path + "\\temp\\" + result);
+                    tempfile.MoveTo(path + "\\" + result);
                     item.Newfilename = result;
                 }
                 catch (Exception ex)
@@ -576,7 +576,7 @@ namespace ProjectBatchName.ViewModel
                         item.Newfoldername = result;
                         item.Error = "OK";
                     }
-                    catch (Exception ex) 
+                    catch (Exception ex)
                     {
                         string duplicatestore = Path.GetDirectoryName(item.Path) + "\\Store" + $"{++next}";
                         CopyAll(tempFolderPath, duplicatestore, true);
@@ -601,44 +601,14 @@ namespace ProjectBatchName.ViewModel
                 dupWin.ShowDialog();
             }
             Preview previewWin = new Preview(fileInfoList, folderInfoList);
-            if (previewWin.ShowDialog() == true)
-            {
-                Temp1 = fileService.CopyAll(fileInfoList);
-                    foreach (var item in Temp1)
-                    {
-                        string result = item.Filename;
-                        foreach (var action in actionList)
-                        {
-                            result = action.Operate(result);
-                        }
-                        var path = Path.GetDirectoryName(item.Path);
-                        try
-                        {
-                            var tempfile = new FileInfo(item.Path);
-                                tempfile.MoveTo(path + "\\" + result);
-                            item.Newfilename = result;
-                        }
-                        catch (Exception ex)
-                        {
-                            isDuplicate = true;
-                            item.Newfilename = result;
-                            item.Error = "Duplicate";
-                            DuplicateFiles.Add(item);
-                        }
-                    }
-            } else
-            {
+            previewWin.ShowDialog();
+            fileInfoList.Clear();
+            fileInfoList = fileService.CopyAll(Temp1);
+            OnPropertyChanged("fileInfoList");
+            folderInfoList.Clear();
+            folderInfoList = folderService.CopyAll(Temp2);
+            OnPropertyChanged("folderInfoList");
 
-            }
-
-            
-
-        }
-
-        private bool isApply = false;
-        private void ApplyButton_Click(object sender, RoutedEventArgs e)
-        {
-            isApply = true;
         }
 
         public static void CopyAll(string sourceDirName, string destDirName, bool copySubDirs)
