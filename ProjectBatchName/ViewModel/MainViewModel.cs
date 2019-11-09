@@ -67,7 +67,7 @@ namespace ProjectBatchName.ViewModel
 
         #region Duplicate
         public ObservableCollection<string> DuplicateCollection { get; set; }
-        
+
         #endregion
 
         #region action
@@ -123,7 +123,7 @@ namespace ProjectBatchName.ViewModel
             {
                 _SelectedOperation = value;
                 OnPropertyChanged();
-               //actionList.Add(_SelectedOperation.Clone());  // unnecessary
+                //actionList.Add(_SelectedOperation.Clone());  // unnecessary
             }
         }
         #endregion
@@ -164,14 +164,14 @@ namespace ProjectBatchName.ViewModel
                 fileService = Services.File.FileService.Instance;
                 folderService = Services.Folder.FolderService.Instance;
                 fileInfoList = new ObservableCollection<fileInfo>();
-                
+
                 folderInfoList = new ObservableCollection<folderInfo>();
                 operationCollection = new ObservableCollection<StringOperation>();
                 operationCollection.Add(new ReplaceOpertion() { Args = new ReplaceArgs() { From = "From", To = "To" } });
                 operationCollection.Add(new NewCaseOperation() { Args = new NewCaseArgs() { Mode = 3 } });
                 operationCollection.Add(new NewFullnameNormalize() { Args = new NewFullNameNormalizeArgs() }); ;
                 operationCollection.Add(new Move() { Args = new MoveArgs() { Mode = 1 } });
-                operationCollection.Add(new UniqueName() { Args = new UniqueNameArgs()});
+                operationCollection.Add(new UniqueName() { Args = new UniqueNameArgs() });
                 actionList = new ObservableCollection<StringOperation>();
             }
         }
@@ -373,6 +373,129 @@ namespace ProjectBatchName.ViewModel
         }
         #endregion
 
+        #region SavePresetMethod
+        private ICommand _savePresetCommand;
+        public ICommand SavePresetCommand
+        {
+            get
+            {
+                return _savePresetCommand ??
+                     (_savePresetCommand = new RelayCommand<object>(
+                         (p) => CanExecuteSavePresetCommand(),
+                            (p) => ExecuteSavePresetCommand()));
+            }
+        }
+        private bool CanExecuteSavePresetCommand()
+        {
+            return actionList.Count() > 0;
+        }
+
+        private void ExecuteSavePresetCommand()
+        {
+
+            string preset = "";
+            foreach (var action in actionList)
+            {
+                //   Debug.WriteLine(action.Name);
+                if (action.Name == "Replace")
+                {
+                    var args = action.Args as ReplaceArgs;
+                    preset += "0" + "," + args.From + "," + args.To + "\r\n";
+                }
+                else if (action.Name == "New Case")
+                {
+                    var args = action.Args as NewCaseArgs;
+                    preset += "1" + "," + args.Mode.ToString() + "\r\n";
+                }
+                else if (action.Name == "Move")
+                {
+                    var args = action.Args as MoveArgs;
+                    preset += "2" + "," + args.Mode + "\r\n";
+                }
+                else if (action.Name == "Unique Name")
+                {
+                    preset += "3" + "\r\n";
+                }
+                else
+                {
+                    preset += "4" + "\r\n";
+                }
+            }
+            var saveFileDialog = new SaveFileDialog();
+            saveFileDialog.Filter = "Text files (*.txt)|*.txt|All files (*.*)|*.*";
+            if (saveFileDialog.ShowDialog() == DialogResult.OK)
+            {
+                using (StreamWriter sw = new StreamWriter(saveFileDialog.FileName))
+                    sw.WriteLine(preset);
+            }
+        }
+        #endregion
+
+        #region LoadPresetMethod
+        private ICommand _loadPresetCommand;
+        public ICommand LoadPresetCommand
+        {
+            get
+            {
+                return _loadPresetCommand ??
+                     (_loadPresetCommand = new RelayCommand<object>(
+                         (p) => CanExecuteLoadPresetCommand(),
+                            (p) => ExecuteLoadPresetCommand()));
+            }
+        }
+        private bool CanExecuteLoadPresetCommand()
+        {
+            return true;
+        }
+
+        private void ExecuteLoadPresetCommand()
+        {
+            var openFileDialog = new OpenFileDialog();
+            if (openFileDialog.ShowDialog() == DialogResult.OK)
+            {
+                string preset = File.ReadAllText(openFileDialog.FileName);
+                string[] seperator = { ",", "\r\n" };
+                var tokens = preset.Split(seperator, StringSplitOptions.None);
+                actionList.Clear();
+                int i = 0;
+                while (i < tokens.Length)
+                {
+                    if (tokens[i] == "0")
+                    {
+                        actionList.Add(new ReplaceOpertion() { Args = new ReplaceArgs() { From = tokens[i + 1], To = tokens[i + 2] } });
+                        i += 3;
+                        continue;
+                    }
+                    if (tokens[i] == "1")
+                    {
+                        actionList.Add(new NewCaseOperation() { Args = new NewCaseArgs() { Mode = Int32.Parse(tokens[i + 1]) } });
+                        i += 2;
+                        continue;
+                    }
+                    if (tokens[i] == "2")
+                    {
+                        actionList.Add(new Move() { Args = new MoveArgs() { Mode = Int32.Parse(tokens[i + 1]) } }); ;
+                        i += 2;
+                        continue;
+                    }
+                    if (tokens[i] == "3")
+                    {
+                        actionList.Add(new UniqueName() { Args = new UniqueNameArgs() });
+                        i += 1;
+                        continue;
+                    }
+                    if (tokens[i] == "4")
+                    {
+                        actionList.Add(new NewFullnameNormalize() { Args = new NewFullNameNormalizeArgs()});
+                        i += 1;
+                        continue;
+                    }
+                    break;
+                }
+            }
+
+        }
+        #endregion
         #endregion
 
         #region Excute
@@ -453,7 +576,7 @@ namespace ProjectBatchName.ViewModel
                         item.Newfoldername = result;
                         item.Error = "OK";
                     }
-                    catch (Exception ex) 
+                    catch (Exception ex)
                     {
                         string duplicatestore = Path.GetDirectoryName(item.Path) + "\\Store" + $"{++next}";
                         CopyAll(tempFolderPath, duplicatestore, true);
@@ -477,7 +600,7 @@ namespace ProjectBatchName.ViewModel
                 DuplicateProcess dupWin = new DuplicateProcess(DuplicateFiles, DuplicateFolders);
                 dupWin.ShowDialog();
             }
-            Preview previewWin = new Preview(fileInfoList,folderInfoList);
+            Preview previewWin = new Preview(fileInfoList, folderInfoList);
             previewWin.ShowDialog();
             fileInfoList.Clear();
             fileInfoList = fileService.CopyAll(Temp1);
