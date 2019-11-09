@@ -13,25 +13,16 @@ using System.Windows.Media.Imaging;
 using System.Windows.Navigation;
 using System.Windows.Shapes;
 
-namespace ProjectBatchName
+namespace ProjectBatchName.UserControls
 {
     /// <summary>
-    /// Interaction logic for MainWindow.xaml
+    /// Interaction logic for UniqueName.xaml
     /// </summary>
-    public partial class MainWindow : Window
+    public partial class UniqueName : BaseUserControl
     {
-        public MainWindow()
+        public UniqueName()
         {
             InitializeComponent();
-        }
-
-        private void MenuItem_Click(object sender, RoutedEventArgs e)
-        {
-        }
-
-        private void ActionListBox_SelectionChanged(object sender, SelectionChangedEventArgs e)
-        {
-
         }
     }
 }

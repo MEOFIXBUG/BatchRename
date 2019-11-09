@@ -116,7 +116,7 @@ namespace ProjectBatchName.ViewModel
             {
                 _SelectedOperation = value;
                 OnPropertyChanged();
-                actionList.Add(_SelectedOperation);  // unnecessary
+               //actionList.Add(_SelectedOperation.Clone());  // unnecessary
             }
         }
         #endregion
@@ -335,12 +335,13 @@ namespace ProjectBatchName.ViewModel
 
         private void ExecuteAddOperationCommand()
         {
-            actionList.Add(SelectedOperation);
+            actionList.Add(SelectedOperation.Clone());
+            SelectedAction = actionList.Count - 1;
         }
         #endregion
 
         #region DelMethod
-        
+
         private ICommand _deleteOperationCommand;
         public ICommand DeleteOperationCommand
         {
@@ -352,6 +353,8 @@ namespace ProjectBatchName.ViewModel
                             (p) => ExecuteDeleteOperationCommand()));
             }
         }
+
+
         private void ExecuteDeleteOperationCommand()
         {
             actionList.RemoveAt(SelectedAction);
@@ -366,5 +369,14 @@ namespace ProjectBatchName.ViewModel
 
         #endregion
 
+        private StringOperation selectedValue;
+        public StringOperation SelectedValue
+        {
+            get => selectedValue; set
+            {
+                selectedValue = value;
+                OnPropertyChanged();
+            }
+        }
     }
 }

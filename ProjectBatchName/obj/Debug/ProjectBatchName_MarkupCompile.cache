@@ -4,17 +4,17 @@
 winexe
 C#
 .cs
-F:\OneDrive - VNU-HCMUS\HCMUS\Nam 3\Lap Trinh Windows\DoAn1\BatchRename\ProjectBatchName\obj\Debug\
+C:\Users\hoang\Desktop\BatchRename\ProjectBatchName\obj\Debug\
 ProjectBatchName
 none
 false
 DEBUG;TRACE
-F:\OneDrive - VNU-HCMUS\HCMUS\Nam 3\Lap Trinh Windows\DoAn1\BatchRename\ProjectBatchName\App.xaml
-2156106907
+C:\Users\hoang\Desktop\BatchRename\ProjectBatchName\App.xaml
+7-825333001
 
-18160358598
+25-614338737
 14-1290796308
-MainWindow.xaml;MyResource\MainResource.xaml;
+MainWindow.xaml;MyResource\MainResource.xaml;UserControls\FullNameNormalizeUC.xaml;UserControls\MoveUC.xaml;UserControls\NewCaseUC.xaml;UserControls\ReplaceUC.xaml;UserControls\UniqueName.xaml;
 
 False
 

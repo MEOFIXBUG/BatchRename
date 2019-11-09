@@ -66,6 +66,23 @@
     <Compile Include="Services\File\IFileService.cs" />
     <Compile Include="Services\Folder\FolderService.cs" />
     <Compile Include="Services\Folder\IFolderService.cs" />
+    <Compile Include="UserControls\BaseUserControl.cs" />
+    <Compile Include="UserControls\FullNameNormalizeUC.xaml.cs">
+      <DependentUpon>FullNameNormalizeUC.xaml</DependentUpon>
+    </Compile>
+    <Compile Include="UserControls\MoveUC.xaml.cs">
+      <DependentUpon>MoveUC.xaml</DependentUpon>
+    </Compile>
+    <Compile Include="UserControls\NewCaseUC.xaml.cs">
+      <DependentUpon>NewCaseUC.xaml</DependentUpon>
+    </Compile>
+    <Compile Include="UserControls\RadioBoolToIntConverter.cs" />
+    <Compile Include="UserControls\ReplaceUC.xaml.cs">
+      <DependentUpon>ReplaceUC.xaml</DependentUpon>
+    </Compile>
+    <Compile Include="UserControls\UniqueName.xaml.cs">
+      <DependentUpon>UniqueName.xaml</DependentUpon>
+    </Compile>
     <Compile Include="ViewModel\BaseViewModel.cs" />
     <Compile Include="ViewModel\MethodsViewModel.cs" />
     <Compile Include="ViewModel\MainViewModel.cs" />
@@ -82,6 +99,26 @@
       <SubType>Code</SubType>
     </Compile>
     <Page Include="MyResource\MainResource.xaml">
+      <SubType>Designer</SubType>
+      <Generator>MSBuild:Compile</Generator>
+    </Page>
+    <Page Include="UserControls\FullNameNormalizeUC.xaml">
+      <SubType>Designer</SubType>
+      <Generator>MSBuild:Compile</Generator>
+    </Page>
+    <Page Include="UserControls\MoveUC.xaml">
+      <SubType>Designer</SubType>
+      <Generator>MSBuild:Compile</Generator>
+    </Page>
+    <Page Include="UserControls\NewCaseUC.xaml">
+      <SubType>Designer</SubType>
+      <Generator>MSBuild:Compile</Generator>
+    </Page>
+    <Page Include="UserControls\ReplaceUC.xaml">
+      <SubType>Designer</SubType>
+      <Generator>MSBuild:Compile</Generator>
+    </Page>
+    <Page Include="UserControls\UniqueName.xaml">
       <SubType>Designer</SubType>
       <Generator>MSBuild:Compile</Generator>
     </Page>

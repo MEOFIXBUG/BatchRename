@@ -4,6 +4,8 @@
         xmlns:d="http://schemas.microsoft.com/expression/blend/2008"
         xmlns:mc="http://schemas.openxmlformats.org/markup-compatibility/2006"
         xmlns:local="clr-namespace:ProjectBatchName"
+        xmlns:model="clr-namespace:ProjectBatchName.Model"
+        xmlns:usercontrols="clr-namespace:ProjectBatchName.UserControls"
         mc:Ignorable="d"
         DataContext="{StaticResource MainVM}"
         Title="Batch Rename" Height="450" Width="800">
@@ -49,7 +51,7 @@
                         <!--Methods-->
                         <Label Content="Method: "/>
                         <ComboBox Width="125" x:Name="methodComboBox" Height="20" 
-                                  SelectedItem="{Binding SelectedOperation}"
+                                  SelectedValue="{Binding SelectedOperation}"
                                   DisplayMemberPath="Name"
                                   FontWeight="Bold" Foreground="Red"
                                   ItemsSource="{Binding operationCollection}" Margin="0,3,0,0" VerticalAlignment="Top">
@@ -114,27 +116,63 @@
                 <ColumnDefinition Width="2*"/>
                 <ColumnDefinition Width="5*"/>
             </Grid.ColumnDefinitions>
-            
-            <ListView Name="ActionListBox"
-                     ItemsSource="{Binding actionList}"   
+            <Grid>
+                <Grid.RowDefinitions>
+                    <RowDefinition Height="3*"></RowDefinition>
+                    <RowDefinition Height="2*"></RowDefinition>
+                </Grid.RowDefinitions>
+                <!--Selected Operations-->
+                <ListView Grid.Row="0" Name="ActionListBox"
+                     ItemsSource="{Binding actionList}"  
+                     SelectedValue="{Binding SelectedValue}"
                      SelectionMode="Extended"
-                     SelectedIndex="{Binding SelectedAction}"                     
-                     Grid.Column="0" ScrollViewer.HorizontalScrollBarVisibility="Disabled">
-                <ListView.ContextMenu>
-                    <ContextMenu>
-                        <MenuItem Header="Edit"/>
-                    </ContextMenu>
-                </ListView.ContextMenu>
-                <ListBox.ItemTemplate>
-                    <DataTemplate>
-                        <StackPanel Orientation="Vertical">
-                            <TextBlock Text="{Binding Name}" FontFamily="Comic Sans MS" FontWeight="Bold" Foreground="Red"/>
-                            
-                            <TextBlock Text="{Binding Description}" FontFamily="Comic Sans MS" />
-                        </StackPanel>
-                    </DataTemplate>
-                </ListBox.ItemTemplate>
-            </ListView>
+                     SelectedIndex="{Binding SelectedAction}"   
+                          SelectionChanged="ActionListBox_SelectionChanged"
+                     Grid.Column="0" ScrollViewer.HorizontalScrollBarVisibility="Disabled" >
+                    <ListView.ContextMenu>
+                        <ContextMenu>
+                            <MenuItem Header="Edit" Click="MenuItem_Click"/>
+                        </ContextMenu>
+                    </ListView.ContextMenu>
+                    <ListBox.ItemTemplate>
+                        <DataTemplate>
+                            <StackPanel Orientation="Vertical">
+                                <TextBlock Text="{Binding Name}" FontFamily="Comic Sans MS" FontWeight="Bold" Foreground="Red"/>
+                               
+                            </StackPanel>
+                        </DataTemplate>
+                    </ListBox.ItemTemplate>
+                </ListView>
+
+                <ContentPresenter Grid.Row="1"
+                                  Content="{Binding ElementName=ActionListBox, Path=SelectedValue}">
+                    <ContentPresenter.Resources>
+                        
+                        <!--ReplaceOperation-->
+                        <DataTemplate DataType="{x:Type model:ReplaceOpertion}">
+                            <usercontrols:ReplaceUC ReplaceArgs="{Binding ElementName=ActionListBox, Path=SelectedValue.Args}"></usercontrols:ReplaceUC>
+                        </DataTemplate>
+                        <!--NewCaseOperation-->
+                        <DataTemplate DataType="{x:Type model:NewCaseOperation}">
+                            <usercontrols:NewCaseUC NewCaseArgs="{Binding ElementName=ActionListBox, Path=SelectedValue.Args}"></usercontrols:NewCaseUC>
+                        </DataTemplate>
+                        <!--MoveOperation-->
+                        <DataTemplate DataType="{x:Type model:Move}">
+                            <usercontrols:MoveUC MoveArgs="{Binding ElementName=ActionListBox, Path=SelectedValue.Args}"/>
+                        </DataTemplate>
+                        <!--FullNameNormalize-->
+                        <DataTemplate DataType="{x:Type model:NewFullnameNormalize}">
+                            <usercontrols:FullNameNormalizeUC></usercontrols:FullNameNormalizeUC>
+                        </DataTemplate>
+                        <!--UniqueName-->
+                        <DataTemplate DataType="{x:Type model:UniqueName}">
+                            <usercontrols:UniqueName></usercontrols:UniqueName>
+                        </DataTemplate>
+
+                    </ContentPresenter.Resources>
+                </ContentPresenter>
+            </Grid>
+
             <GridSplitter Width="3px"></GridSplitter>
             <TabControl Grid.Column="1">
                 <TabItem>
@@ -164,17 +202,17 @@
                                 </StackPanel>
                             </ToolBar>
                         </ToolBarTray>
-                        
-                                <DataGrid Name="FileTab" Height="300" Background="Transparent" GridLinesVisibility="All" ItemsSource="{Binding fileInfoList}" SelectedItem="{Binding SelectedFile}" AutoGenerateColumns="False" ScrollViewer.CanContentScroll="True" ScrollViewer.VerticalScrollBarVisibility="Auto">
-                                    <DataGrid.Columns>
-                                        <DataGridTextColumn Header="Filename" Width="150" Binding="{Binding Filename}"/>
-                                        <DataGridTextColumn Header="New Filename" Width="150" Binding="{Binding Newfilename}"/>
-                                        <DataGridTextColumn Header="Path" Width="150" Binding="{Binding Path}"/>
-                                        <DataGridTextColumn Header="Error" Width="*" Binding="{Binding Error}"/>
-                                    </DataGrid.Columns>
-                                </DataGrid>
 
-                        
+                        <DataGrid Name="FileTab" Height="300" Background="Transparent" GridLinesVisibility="All" ItemsSource="{Binding fileInfoList}" SelectedItem="{Binding SelectedFile}" AutoGenerateColumns="False" ScrollViewer.CanContentScroll="True" ScrollViewer.VerticalScrollBarVisibility="Auto">
+                            <DataGrid.Columns>
+                                <DataGridTextColumn Header="Filename" Width="150" Binding="{Binding Filename}"/>
+                                <DataGridTextColumn Header="New Filename" Width="150" Binding="{Binding Newfilename}"/>
+                                <DataGridTextColumn Header="Path" Width="150" Binding="{Binding Path}"/>
+                                <DataGridTextColumn Header="Error" Width="*" Binding="{Binding Error}"/>
+                            </DataGrid.Columns>
+                        </DataGrid>
+
+
                     </StackPanel>
                 </TabItem>
                 <TabItem>

@@ -1,0 +1,24 @@
+﻿<local:BaseUserControl x:Class="ProjectBatchName.UserControls.MoveUC"
+             xmlns="http://schemas.microsoft.com/winfx/2006/xaml/presentation"
+             xmlns:x="http://schemas.microsoft.com/winfx/2006/xaml"
+             xmlns:mc="http://schemas.openxmlformats.org/markup-compatibility/2006" 
+             xmlns:d="http://schemas.microsoft.com/expression/blend/2008" 
+             xmlns:local="clr-namespace:ProjectBatchName.UserControls"
+             mc:Ignorable="d" 
+             d:DesignHeight="450" d:DesignWidth="800"
+             Loaded="BaseUserControl_Loaded">
+    <Grid>
+        <Grid.Resources>
+            <local:StringToIntConverter x:Key="stringConverter"></local:StringToIntConverter>
+            <local:RadioBoolToIntConverter x:Key="radioButtonConverter"/>
+        </Grid.Resources>
+        <StackPanel>
+            <RadioButton Name="button1" Content="Move to start" IsChecked="{Binding MoveArgs.Mode, Converter={StaticResource radioButtonConverter}, ConverterParameter=1}"></RadioButton>
+            <RadioButton Name="button2" Content="Move to end" IsChecked="{Binding MoveArgs.Mode, Converter={StaticResource radioButtonConverter}, ConverterParameter=2}"></RadioButton>
+            <StackPanel>
+                <TextBlock Text="Length:" Width="50" Height="25"></TextBlock>
+                <TextBox Text="{Binding MoveArgs.Length, Converter={StaticResource stringConverter}}" ></TextBox>
+            </StackPanel>
+        </StackPanel>
+    </Grid>
+</local:BaseUserControl>

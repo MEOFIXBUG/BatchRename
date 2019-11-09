@@ -1,0 +1,31 @@
+﻿<local:BaseUserControl x:Class="ProjectBatchName.UserControls.NewCaseUC"
+             xmlns="http://schemas.microsoft.com/winfx/2006/xaml/presentation"
+             xmlns:x="http://schemas.microsoft.com/winfx/2006/xaml"
+             xmlns:mc="http://schemas.openxmlformats.org/markup-compatibility/2006" 
+             xmlns:d="http://schemas.microsoft.com/expression/blend/2008" 
+             xmlns:local="clr-namespace:ProjectBatchName.UserControls"
+             mc:Ignorable="d" 
+             d:DesignHeight="450" d:DesignWidth="800"
+                       Loaded="BaseUserControl_Loaded"
+            >
+
+    <Grid>
+        <Grid.Resources>
+            <local:RadioBoolToIntConverter x:Key="radioBoolToIntConverter"></local:RadioBoolToIntConverter>
+        </Grid.Resources>
+        <StackPanel HorizontalAlignment="Center" VerticalAlignment="Center">
+            <RadioButton Click="button1_Click" Name="button1" IsChecked="{Binding NewCaseArgs.Mode,
+                Converter={StaticResource radioBoolToIntConverter},
+                ConverterParameter=1}"
+                         Content="Lower case" />
+            <RadioButton Name="button2" IsChecked="{Binding NewCaseArgs.Mode,
+                Converter={StaticResource radioBoolToIntConverter},
+                ConverterParameter=2}"
+                         Content="Lower case" />
+            <RadioButton Name="button3" IsChecked="{Binding NewCaseArgs.Mode,
+                Converter={StaticResource radioBoolToIntConverter},
+                ConverterParameter=3}"
+                         Content="Lower case" />
+        </StackPanel>
+    </Grid>
+</local:BaseUserControl>
