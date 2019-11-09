@@ -200,11 +200,11 @@ namespace ProjectBatchName.ViewModel
 
         private void ExecuteAddFileCommand()
         {
-            var screen = new OpenFileDialog();
-            screen.Multiselect = true;
+            var screen = new System.Windows.Forms.FolderBrowserDialog();
+
             if (screen.ShowDialog() == System.Windows.Forms.DialogResult.OK)
             {
-                var listFile = screen.FileNames;
+                var listFile = Directory.GetFiles(screen.SelectedPath) ;
                 foreach (var file in listFile)
                 {
                     var temp = new fileInfo();
