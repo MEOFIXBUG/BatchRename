@@ -197,23 +197,10 @@
                                             <TextBlock Text="Del"/>
                                         </StackPanel>
                                     </Button>
-                                    
+
                                 </StackPanel>
                             </ToolBar>
                         </ToolBarTray>
-<<<<<<< HEAD
-=======
-                        
-                                <DataGrid Name="FileTab" Height="276" Background="Transparent" GridLinesVisibility="All" ItemsSource="{Binding fileInfoList, UpdateSourceTrigger=PropertyChanged}"  SelectedItem="{Binding SelectedFile}" AutoGenerateColumns="False" ScrollViewer.CanContentScroll="True" ScrollViewer.VerticalScrollBarVisibility="Auto">
-                                    <DataGrid.Columns>
-                                        <DataGridTextColumn Header="Filename" Width="150" Binding="{Binding Filename}"/>
-                                        <DataGridTextColumn Header="New Filename" Width="150" Binding="{Binding Newfilename}"/>
-                                        <DataGridTextColumn Header="Path" Width="150" Binding="{Binding Path}"/>
-                                        <DataGridTextColumn Header="Error" Width="*" Binding="{Binding Error}"/>
-                                    </DataGrid.Columns>
-                                </DataGrid>
->>>>>>> b7b52b58084d251d8d5041e1a0349bb6df288a16
-
                         <DataGrid Name="FileTab" Height="300" Background="Transparent" GridLinesVisibility="All" ItemsSource="{Binding fileInfoList}" SelectedItem="{Binding SelectedFile}" AutoGenerateColumns="False" ScrollViewer.CanContentScroll="True" ScrollViewer.VerticalScrollBarVisibility="Auto">
                             <DataGrid.Columns>
                                 <DataGridTextColumn Header="Filename" Width="150" Binding="{Binding Filename}"/>
