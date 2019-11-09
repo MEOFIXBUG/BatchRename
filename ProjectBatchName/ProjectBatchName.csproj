@@ -56,12 +56,19 @@
       <Generator>MSBuild:Compile</Generator>
       <SubType>Designer</SubType>
     </ApplicationDefinition>
+    <Compile Include="Common\Enum.cs" />
+    <Compile Include="DuplicateProcess.xaml.cs">
+      <DependentUpon>DuplicateProcess.xaml</DependentUpon>
+    </Compile>
     <Compile Include="Logic\ILogic.cs" />
     <Compile Include="Logic\Logic.cs" />
     <Compile Include="Model\Domain Object\fileInfo.cs" />
     <Compile Include="Model\Domain Object\folderInfo.cs" />
     <Compile Include="Model\System Object\StringArgs.cs" />
     <Compile Include="Model\System Object\StringOperation.cs" />
+    <Compile Include="Preview.xaml.cs">
+      <DependentUpon>Preview.xaml</DependentUpon>
+    </Compile>
     <Compile Include="Services\File\FileService.cs" />
     <Compile Include="Services\File\IFileService.cs" />
     <Compile Include="Services\Folder\FolderService.cs" />
@@ -84,8 +91,13 @@
       <DependentUpon>UniqueName.xaml</DependentUpon>
     </Compile>
     <Compile Include="ViewModel\BaseViewModel.cs" />
+    <Compile Include="ViewModel\DuplicateViewModel.cs" />
     <Compile Include="ViewModel\MethodsViewModel.cs" />
     <Compile Include="ViewModel\MainViewModel.cs" />
+    <Page Include="DuplicateProcess.xaml">
+      <SubType>Designer</SubType>
+      <Generator>MSBuild:Compile</Generator>
+    </Page>
     <Page Include="MainWindow.xaml">
       <Generator>MSBuild:Compile</Generator>
       <SubType>Designer</SubType>
@@ -102,6 +114,7 @@
       <SubType>Designer</SubType>
       <Generator>MSBuild:Compile</Generator>
     </Page>
+<<<<<<< HEAD
     <Page Include="UserControls\FullNameNormalizeUC.xaml">
       <SubType>Designer</SubType>
       <Generator>MSBuild:Compile</Generator>
@@ -119,6 +132,9 @@
       <Generator>MSBuild:Compile</Generator>
     </Page>
     <Page Include="UserControls\UniqueName.xaml">
+=======
+    <Page Include="Preview.xaml">
+>>>>>>> b7b52b58084d251d8d5041e1a0349bb6df288a16
       <SubType>Designer</SubType>
       <Generator>MSBuild:Compile</Generator>
     </Page>

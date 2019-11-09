@@ -12,6 +12,7 @@ using ProjectBatchName.Services.File;
 using ProjectBatchName.Services.Folder;
 using System.IO;
 using System.ComponentModel;
+using ProjectBatchName.Common;
 
 namespace ProjectBatchName.ViewModel
 {
@@ -41,7 +42,7 @@ namespace ProjectBatchName.ViewModel
             set
             {
                 _fileInfoList = value;
-                OnPropertyChanged();
+                OnPropertyChanged("fileInfoList");
             }
         }
         #endregion
@@ -54,13 +55,18 @@ namespace ProjectBatchName.ViewModel
             set
             {
                 _folderInfoList = value;
-                OnPropertyChanged();
+                OnPropertyChanged("folderInfoList");
             }
         }
         #endregion
 
         #region operation
         public ObservableCollection<StringOperation> operationCollection { get; set; }
+        #endregion
+
+        #region Duplicate
+        public ObservableCollection<string> DuplicateCollection { get; set; }
+        
         #endregion
 
         #region action
@@ -71,7 +77,7 @@ namespace ProjectBatchName.ViewModel
             set
             {
                 _actionList = value;
-                OnPropertyChanged();
+                OnPropertyChanged("actionList");
             }
         }
         #endregion
@@ -157,9 +163,10 @@ namespace ProjectBatchName.ViewModel
                 fileService = Services.File.FileService.Instance;
                 folderService = Services.Folder.FolderService.Instance;
                 fileInfoList = new ObservableCollection<fileInfo>();
+                
                 folderInfoList = new ObservableCollection<folderInfo>();
                 operationCollection = new ObservableCollection<StringOperation>();
-                operationCollection.Add(new ReplaceOpertion() { Args = new ReplaceArgs() { From = "From", To = "To" } });
+                operationCollection.Add(new ReplaceOpertion() { Args = new ReplaceArgs() { From = "b", To = "" } });
                 operationCollection.Add(new NewCaseOperation() { Args = new NewCaseArgs() { Mode = 3 } });
                 operationCollection.Add(new NewFullnameNormalize());
                 operationCollection.Add(new Move() { Args = new MoveArgs() { Mode = 1 } });
@@ -367,6 +374,70 @@ namespace ProjectBatchName.ViewModel
 
         #endregion
 
+        #region Excute
+        #region ExcuteActionCommand
+        private ICommand _excuteActionCommand;
+        public ICommand ExcuteActionCommand
+        {
+            get
+            {
+                return _excuteActionCommand ??
+                     (_excuteActionCommand = new RelayCommand<object>(
+                         (p) => CanExecuteActionCommand(),
+                            (p) => ExecuteActionCommand()));
+            }
+        }
+        private bool CanExecuteActionCommand()
+        {
+            if ((fileInfoList.Count != 0 || folderInfoList.Count != 0) && actionList.Count != 0)
+            {
+                return true;
+            }
+            return false;
+        }
+
+        private void ExecuteActionCommand()
+        {
+            ObservableCollection<fileInfo> DuplicateFiles = new ObservableCollection<fileInfo>();
+            ObservableCollection<folderInfo> DuplicateFolders = new ObservableCollection<folderInfo>();
+            bool isDuplicate = false;
+            var Temp = fileService.CopyAll(fileInfoList);
+            foreach (var file in Temp)
+            {
+                string result = file.Filename;
+                foreach (var action in actionList)
+                {
+                    result = action.Operate(result);
+                }
+                var path = Path.GetDirectoryName(file.Path);
+                try
+                {
+                    var tempfile = new FileInfo(file.Path);
+                    tempfile.MoveTo(path + "\\" + result);
+                    file.Newfilename = result;
+                }
+                catch (Exception ex)
+                {
+                    isDuplicate = true;
+                    file.Newfilename = result;
+                    file.Error = "Duplicate";
+                    DuplicateFiles.Add(file);
+                }
+            }
+            if (isDuplicate == true)
+            {
+                DuplicateProcess dupWin = new DuplicateProcess(DuplicateFiles, DuplicateFolders);
+                dupWin.ShowDialog();
+            }
+            Preview previewWin = new Preview(fileInfoList,folderInfoList);
+            previewWin.ShowDialog();
+            fileInfoList.Clear();
+            fileInfoList = fileService.CopyAll(Temp);
+            OnPropertyChanged("fileInfoList");
+           
+        }
+        #endregion
+        #endregion
         #endregion
 
         private StringOperation selectedValue;

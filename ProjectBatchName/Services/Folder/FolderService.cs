@@ -23,5 +23,14 @@ namespace ProjectBatchName.Services.Folder
             }
             return i;
         }
+        public ObservableCollection<folderInfo> CopyAll(ObservableCollection<folderInfo> fList)
+        {
+            ObservableCollection<folderInfo> result = new ObservableCollection<folderInfo>();
+            foreach (var item in fList)
+            {
+                    result.Add(item);
+            }
+            return result;
+        }
     }
 }
