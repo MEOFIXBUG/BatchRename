@@ -13,7 +13,7 @@
         <Grid.RowDefinitions>
             <RowDefinition Height="30"/>
             <RowDefinition Height="*"/>
-            <RowDefinition Height="30"/>
+            <RowDefinition Height="50"/>
         </Grid.RowDefinitions>
         <Label Content="Preview" FontFamily="Comic Sans MS" FontSize="15" Grid.Row="0" HorizontalAlignment="Center"/>
         <TabControl Grid.Row="1">
@@ -24,7 +24,7 @@
                     </StackPanel>
                 </TabItem.Header>
                 <StackPanel Orientation="Vertical">
-                    <DataGrid Name="FilePreviewTab" Background="Transparent" GridLinesVisibility="All"  AutoGenerateColumns="False" ScrollViewer.CanContentScroll="True" ScrollViewer.VerticalScrollBarVisibility="Auto">
+                    <DataGrid Name="FilePreviewTab" Height="300" Background="Transparent" GridLinesVisibility="All"  AutoGenerateColumns="False" ScrollViewer.CanContentScroll="True" ScrollViewer.VerticalScrollBarVisibility="Auto">
                         <DataGrid.Columns>
                             <DataGridTextColumn Header="Filename" Width="150" Binding="{Binding Filename}"/>
                             <DataGridTextColumn Header="New Filename" Width="150" Binding="{Binding Newfilename}"/>
@@ -52,5 +52,10 @@
                 </StackPanel>
             </TabItem>
         </TabControl>
+        <StackPanel Orientation="Horizontal" Grid.Row="2" HorizontalAlignment="Center">
+            <Button Name="ApplyButton" Width="60" Height="30" Grid.Row="2" Content="Apply" Click="ApplyButton_Click" Margin="10" />
+            <Button Name ="CancelButton" Width="60" Height="30" Grid.Row="2" Content="Cancel" Margin="10" Click="CancelButton_Click" />
+        </StackPanel>
+        
     </Grid>
 </Window>

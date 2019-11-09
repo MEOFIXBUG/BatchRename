@@ -27,5 +27,17 @@ namespace ProjectBatchName
             FilePreviewTab.ItemsSource = FileList;
             FolderPreviewTab.ItemsSource = FolderList;
         }
+
+        private void ApplyButton_Click(object sender, RoutedEventArgs e)
+        {
+            this.DialogResult = true;
+            this.Close();
+        }
+
+        private void CancelButton_Click(object sender, RoutedEventArgs e)
+        {
+            this.DialogResult = false;
+            this.Close();
+        }
     }
 }

@@ -480,13 +480,13 @@ namespace ProjectBatchName.ViewModel
                     }
                     if (tokens[i] == "3")
                     {
-                        actionList.Add(new UniqueName());
+                        actionList.Add(new UniqueName() { Args = new UniqueNameArgs() });
                         i += 1;
                         continue;
                     }
                     if (tokens[i] == "4")
                     {
-                        actionList.Add(new NewFullnameNormalize());
+                        actionList.Add(new NewFullnameNormalize() { Args = new NewFullNameNormalizeArgs() });
                         i += 1;
                         continue;
                     }
@@ -538,7 +538,7 @@ namespace ProjectBatchName.ViewModel
                 try
                 {
                     var tempfile = new FileInfo(item.Path);
-                    tempfile.MoveTo(path + "\\" + result);
+                    tempfile.MoveTo(path + "\\temp\\" + result);
                     item.Newfilename = result;
                 }
                 catch (Exception ex)
@@ -600,15 +600,45 @@ namespace ProjectBatchName.ViewModel
                 DuplicateProcess dupWin = new DuplicateProcess(DuplicateFiles, DuplicateFolders);
                 dupWin.ShowDialog();
             }
-            Preview previewWin = new Preview(fileInfoList,folderInfoList);
-            previewWin.ShowDialog();
-            fileInfoList.Clear();
-            fileInfoList = fileService.CopyAll(Temp1);
-            OnPropertyChanged("fileInfoList");
-            folderInfoList.Clear();
-            folderInfoList = folderService.CopyAll(Temp2);
-            OnPropertyChanged("folderInfoList");
+            Preview previewWin = new Preview(fileInfoList, folderInfoList);
+            if (previewWin.ShowDialog() == true)
+            {
+                Temp1 = fileService.CopyAll(fileInfoList);
+                    foreach (var item in Temp1)
+                    {
+                        string result = item.Filename;
+                        foreach (var action in actionList)
+                        {
+                            result = action.Operate(result);
+                        }
+                        var path = Path.GetDirectoryName(item.Path);
+                        try
+                        {
+                            var tempfile = new FileInfo(item.Path);
+                                tempfile.MoveTo(path + "\\" + result);
+                            item.Newfilename = result;
+                        }
+                        catch (Exception ex)
+                        {
+                            isDuplicate = true;
+                            item.Newfilename = result;
+                            item.Error = "Duplicate";
+                            DuplicateFiles.Add(item);
+                        }
+                    }
+            } else
+            {
 
+            }
+
+            
+
+        }
+
+        private bool isApply = false;
+        private void ApplyButton_Click(object sender, RoutedEventArgs e)
+        {
+            isApply = true;
         }
 
         public static void CopyAll(string sourceDirName, string destDirName, bool copySubDirs)
