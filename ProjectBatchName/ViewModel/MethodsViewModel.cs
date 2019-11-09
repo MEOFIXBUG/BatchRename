@@ -67,6 +67,9 @@ namespace ProjectBatchName.ViewModel
 
         public ICommand AddOperationCommand { get; set; }
         public ICommand DeleteOperationCommand { get; set; }
+        public ICommand SavePresetCommand { get; set; }
+
+        public ICommand LoadPresetCommand { get; set; }
 
         public MethodsViewModel()
         {
@@ -88,6 +91,14 @@ namespace ProjectBatchName.ViewModel
             (p) =>
             CanExecuteDeleteOperationCommand(),
             (p) => ExecuteDeleteOperationCommand());
+
+            SavePresetCommand = new RelayCommand<object>(
+                (p) => CanExecuteSavePresetCommand(),
+                (p) => ExecuteSavePresetCommand());
+
+            LoadPresetCommand = new RelayCommand<object>(
+                (p) => CanExecuteLoadPresetCommand(),
+                (p) => ExecuteLoadPresetCommand());
         }
 
         private void ExecuteAddOperationCommand()
@@ -106,6 +117,26 @@ namespace ProjectBatchName.ViewModel
         private bool CanExecuteDeleteOperationCommand()
         {
             return selectedOperationIndex < 0 ? false : true;
+        }
+
+        private bool CanExecuteSavePresetCommand()
+        {
+            return true;
+        }
+
+        private void ExecuteSavePresetCommand()
+        {
+            //    Debug.WriteLine("Saved");
+        }
+
+        private bool CanExecuteLoadPresetCommand()
+        {
+            return true;
+        }
+
+        private void ExecuteLoadPresetCommand()
+        {
+            //    Debug.WriteLine("Saved");
         }
     }
 }
