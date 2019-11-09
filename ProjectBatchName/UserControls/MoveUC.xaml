@@ -5,22 +5,34 @@
              xmlns:d="http://schemas.microsoft.com/expression/blend/2008" 
              xmlns:local="clr-namespace:ProjectBatchName.UserControls"
              mc:Ignorable="d" 
-             d:DesignHeight="450" d:DesignWidth="800"
+             d:DesignHeight="150" d:DesignWidth="200"
              Loaded="BaseUserControl_Loaded">
     <Grid>
         <Grid.Resources>
             <local:StringToIntConverter x:Key="stringConverter"></local:StringToIntConverter>
             <local:RadioBoolToIntConverter x:Key="radioButtonConverter"/>
         </Grid.Resources>
-        <StackPanel>
+        <Grid.RowDefinitions>
+            <RowDefinition Height="30"></RowDefinition>
+            <RowDefinition></RowDefinition>
+        </Grid.RowDefinitions>
+        <TextBlock Grid.Row="0" Text="Config Action: " FontSize="15" FontWeight="Bold"
+                      Padding="5" />
+        <StackPanel Grid.Row="1" HorizontalAlignment="Center" VerticalAlignment="Center">
+            <TextBlock Text="Move option" FontSize="13" FontWeight="Bold"
+                       Margin="-10 0 0 10"/>
             <StackPanel>
                 <RadioButton Name="button1" Content="Move to start" IsChecked="{Binding MoveArgs.Mode, Converter={StaticResource radioButtonConverter}, ConverterParameter=1}"></RadioButton>
                 <RadioButton Name="button2" Content="Move to end" IsChecked="{Binding MoveArgs.Mode, Converter={StaticResource radioButtonConverter}, ConverterParameter=2}"></RadioButton>
             </StackPanel>
 
-            <TextBlock Text="Length:" Width="50" Height="25"></TextBlock>
-            <TextBox Text="{Binding MoveArgs.Length, Converter={StaticResource stringConverter}}" ></TextBox>
+            <StackPanel Orientation="Horizontal" Margin="0 10 0 0">
+                <TextBlock Margin="-10 0 10 0" Text="Length:" Width="40" Height="25" FontSize="13" FontWeight="Bold"></TextBlock>
+                <TextBox Text="{Binding MoveArgs.Length, Converter={StaticResource stringConverter}}" 
+                         Width="50">
 
+                </TextBox>
+            </StackPanel>
         </StackPanel>
     </Grid>
 </local:BaseUserControl>

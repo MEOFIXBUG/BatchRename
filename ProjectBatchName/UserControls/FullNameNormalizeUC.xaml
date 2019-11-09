@@ -7,6 +7,9 @@
              mc:Ignorable="d" 
              d:DesignHeight="450" d:DesignWidth="800">
     <Grid>
-        <TextBlock Text="Make new full name Normalize"></TextBlock>
+        <TextBlock Text="Make new full name Normalize"
+                   FontSize="13" FontWeight="Bold"
+                   HorizontalAlignment="Center"
+                   VerticalAlignment="Center"></TextBlock>
     </Grid>
 </local:BaseUserControl>

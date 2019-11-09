@@ -46,3 +46,8 @@ C:\Users\hoang\Desktop\BatchRename\ProjectBatchName\obj\Debug\DuplicateProcess.g
 C:\Users\hoang\Desktop\BatchRename\ProjectBatchName\obj\Debug\Preview.g.cs
 C:\Users\hoang\Desktop\BatchRename\ProjectBatchName\obj\Debug\DuplicateProcess.baml
 C:\Users\hoang\Desktop\BatchRename\ProjectBatchName\obj\Debug\Preview.baml
+C:\Users\hoang\Desktop\BatchRename\ProjectBatchName\bin\Debug\Microsoft.WindowsAPICodePack.dll
+C:\Users\hoang\Desktop\BatchRename\ProjectBatchName\bin\Debug\Microsoft.WindowsAPICodePack.Shell.dll
+C:\Users\hoang\Desktop\BatchRename\ProjectBatchName\bin\Debug\Microsoft.WindowsAPICodePack.xml
+C:\Users\hoang\Desktop\BatchRename\ProjectBatchName\bin\Debug\Microsoft.WindowsAPICodePack.Shell.xml
+C:\Users\hoang\Desktop\BatchRename\ProjectBatchName\obj\Debug\ProjectBatchName.csproj.CopyComplete

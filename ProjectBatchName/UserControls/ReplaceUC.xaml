@@ -5,27 +5,36 @@
              xmlns:d="http://schemas.microsoft.com/expression/blend/2008" 
              xmlns:local="clr-namespace:ProjectBatchName.UserControls"
              mc:Ignorable="d" 
-             d:DesignHeight="450" d:DesignWidth="800"
+             d:DesignHeight="150" d:DesignWidth="200"
              x:Name="uc"
                        >
     <Grid>
         <Grid.RowDefinitions>
-            <RowDefinition></RowDefinition>
-            <RowDefinition></RowDefinition>
-            <RowDefinition Height="25"></RowDefinition>
+            <RowDefinition Height="2*"></RowDefinition>
+            <RowDefinition Height="2*"></RowDefinition>
+            <RowDefinition  Height="2*"></RowDefinition>
+            <RowDefinition Height="2*"></RowDefinition>
         </Grid.RowDefinitions>
-        <StackPanel Grid.Row="0"
+        <TextBlock Grid.Row="0" Text="Config Action: " FontSize="15" FontWeight="Bold"
+                      Padding="5" />
+        <StackPanel Orientation="Horizontal" Grid.Row="1"
                     HorizontalAlignment="Center"
-                    VerticalAlignment="Center">
-            <TextBlock Width="50" Height="25" Text="From" HorizontalAlignment="Left"></TextBlock>
-            <TextBox Name="from" Width="150" Text="{Binding ReplaceArgs.From}"></TextBox>
+                    VerticalAlignment="Center"
+                    Margin="20 0 10 0">
+            <TextBlock Width="50" Height="25" Text="From:" HorizontalAlignment="Left"></TextBlock>
+            <TextBox Name="from" Width="100" Text="{Binding ReplaceArgs.From}"></TextBox>
         </StackPanel>
-        <StackPanel Grid.Row="1"
+        <StackPanel Orientation="Horizontal" Grid.Row="2"
                     HorizontalAlignment="Center"
-                    VerticalAlignment="Center">
-            <TextBlock Width="50" Height="25" Text="To" HorizontalAlignment="Left"></TextBlock>
-            <TextBox Name="to" Width="150" Text="{Binding ReplaceArgs.To}"></TextBox>
+                    VerticalAlignment="Center"
+                    Margin="20 0 10 0">
+            <TextBlock Width="50" Height="25" Text="To:" HorizontalAlignment="Left"></TextBlock>
+            <TextBox Name="to" Width="100" Text="{Binding ReplaceArgs.To}"></TextBox>
         </StackPanel>
-        <Button Click="Button_Click" Grid.Row="2" Width="50" Height="25" Content="Okay"></Button>
+        <Button Click="Button_Click"
+                Grid.Row="3" Width="50" Height="25" 
+                Content="Okay"
+                HorizontalAlignment="Right"
+                Margin="0 0 10 5"></Button>
     </Grid>
 </local:BaseUserControl>

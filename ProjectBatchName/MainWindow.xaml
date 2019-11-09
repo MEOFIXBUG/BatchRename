@@ -49,7 +49,7 @@
                 <ToolBar x:Name="MethodBar" Height="30" Background="AliceBlue">
                     <StackPanel Orientation="Horizontal">
                         <!--Methods-->
-                        <Label Content="Method: "/>
+                        <Label Content="Method: " Width="60"/>
                         <ComboBox Width="125" x:Name="methodComboBox" Height="20" 
                                   SelectedValue="{Binding SelectedOperation}"
                                   DisplayMemberPath="Name"
@@ -89,6 +89,7 @@
             <ToolBarTray>
                 <ToolBar Name="PresetBar" Background="AliceBlue">
                     <StackPanel Orientation="Horizontal" Height="25">
+                        <Label Content="Preset:"/>
                         <Button  Name="LoadPreset"  Margin="5,0,5,0" Command="{Binding LoadPresetCommand}">
                             <StackPanel Orientation="Horizontal">
                                 <Image Source="/Images/LoadPreset.png" Height="20" Width="20" RenderOptions.BitmapScalingMode="HighQuality"/>
@@ -99,26 +100,25 @@
                                 <Image Source="/Images/SavePreset.png" Height="20" Width="20" RenderOptions.BitmapScalingMode="HighQuality"/>
                             </StackPanel>
                         </Button>
-                        <Button  Name="ChoosePreset" Margin="5,0,5,0">
-                            <StackPanel Orientation="Horizontal">
-                                <Label Content="Presets: " Padding="2"/>
-                                <ComboBox Name="PresetCombobox" Width="100" Margin="0 2 0 2 ">
 
-                                </ComboBox>
-                            </StackPanel>
-                        </Button>
                     </StackPanel>
                 </ToolBar>
             </ToolBarTray>
         </StackPanel>
-        <Grid Grid.Row="2" Margin="0 0 0 0 ">
+        <Grid Grid.Row="1" Margin="0 0 0 0 ">
             <Grid.ColumnDefinitions>
-                <ColumnDefinition Width="2*"/>
-                <ColumnDefinition Width="5*"/>
+                <ColumnDefinition Width="158*"/>
+                <ColumnDefinition Width="68*"/>
+                <ColumnDefinition Width="567*"/>
             </Grid.ColumnDefinitions>
-            <Grid>
+            <Grid Grid.ColumnSpan="2" Margin="0,0,0.4,0.2">
+                <Grid.ColumnDefinitions>
+                    <ColumnDefinition Width="44.8"/>
+                    <ColumnDefinition/>
+                </Grid.ColumnDefinitions>
                 <Grid.RowDefinitions>
                     <RowDefinition Height="3*"></RowDefinition>
+                    <RowDefinition Height="3"></RowDefinition>
                     <RowDefinition Height="2*"></RowDefinition>
                 </Grid.RowDefinitions>
                 <!--Selected Operations-->
@@ -128,7 +128,7 @@
                      SelectionMode="Extended"
                      SelectedIndex="{Binding SelectedAction}"   
                           SelectionChanged="ActionListBox_SelectionChanged"
-                     Grid.Column="0" ScrollViewer.HorizontalScrollBarVisibility="Disabled" >
+                     Grid.Column="0" ScrollViewer.HorizontalScrollBarVisibility="Disabled" Grid.ColumnSpan="2" Margin="0,0,0,0.2" >
                     <ListView.ContextMenu>
                         <ContextMenu>
                             <MenuItem Header="Edit" Click="MenuItem_Click"/>
@@ -143,11 +143,11 @@
                         </DataTemplate>
                     </ListBox.ItemTemplate>
                 </ListView>
-
+                <GridSplitter Height="5" Grid.Column="1" Margin="0,97,0,97.2" ></GridSplitter>
                 <ContentPresenter Grid.Row="1"
-                                  Content="{Binding ElementName=ActionListBox, Path=SelectedValue}">
+                                  Content="{Binding ElementName=ActionListBox, Path=SelectedValue}" Grid.ColumnSpan="2" Margin="0,2.8,0,0.2" Grid.RowSpan="2">
                     <ContentPresenter.Resources>
-                        
+
                         <!--ReplaceOperation-->
                         <DataTemplate DataType="{x:Type model:ReplaceOpertion}">
                             <usercontrols:ReplaceUC ReplaceArgs="{Binding ElementName=ActionListBox, Path=SelectedValue.Args}"></usercontrols:ReplaceUC>
@@ -173,8 +173,8 @@
                 </ContentPresenter>
             </Grid>
 
-            <GridSplitter Width="3px"></GridSplitter>
-            <TabControl Grid.Column="1">
+            <GridSplitter Width="3px" Grid.Column="1" Margin="0,0,0.4,0.2"></GridSplitter>
+            <TabControl Grid.Column="1" Grid.ColumnSpan="2" Margin="67.665,0,-0.4,0.2">
                 <TabItem>
                     <TabItem.Header>
                         <StackPanel Orientation="Horizontal">
@@ -235,7 +235,7 @@
                                             <TextBlock Text="Del"/>
                                         </StackPanel>
                                     </Button>
-                                    
+
                                 </StackPanel>
                             </ToolBar>
                         </ToolBarTray>

@@ -14,6 +14,7 @@ using System.IO;
 using System.ComponentModel;
 using ProjectBatchName.Common;
 using System.Windows.Forms;
+using Microsoft.WindowsAPICodePack.Dialogs;
 
 namespace ProjectBatchName.ViewModel
 {
@@ -200,11 +201,13 @@ namespace ProjectBatchName.ViewModel
 
         private void ExecuteAddFileCommand()
         {
-            var screen = new System.Windows.Forms.FolderBrowserDialog();
+            CommonOpenFileDialog dialog = new CommonOpenFileDialog();
+            dialog.IsFolderPicker = true;
 
-            if (screen.ShowDialog() == System.Windows.Forms.DialogResult.OK)
+            if (dialog.ShowDialog() == CommonFileDialogResult.Ok)            
             {
-                var listFile = Directory.GetFiles(screen.SelectedPath) ;
+                var listFile = Directory.GetFiles(dialog.FileName);
+                //var listFile = Directory.GetFiles(dialog.FileName);
                 foreach (var file in listFile)
                 {
                     var temp = new fileInfo();
@@ -270,11 +273,11 @@ namespace ProjectBatchName.ViewModel
 
         private void ExecuteAddFolderCommand()
         {
-            string directory;
-            var screen = new System.Windows.Forms.FolderBrowserDialog();
-            if (screen.ShowDialog() == System.Windows.Forms.DialogResult.OK)
+            var dialog = new CommonOpenFileDialog();
+            dialog.IsFolderPicker = true;
+            if (dialog.ShowDialog() == CommonFileDialogResult.Ok)
             {
-                directory = screen.SelectedPath;
+                var directory = dialog.FileName;
                 string[] subDirectory = Directory.GetDirectories(directory);
 
                 foreach (var dir in subDirectory)
