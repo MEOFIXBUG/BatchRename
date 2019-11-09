@@ -15,7 +15,6 @@ C:\Users\doans\Documents\GitHub\BatchRename\ProjectBatchName\obj\Debug\ProjectBa
 C:\Users\doans\Documents\GitHub\BatchRename\ProjectBatchName\obj\Debug\ProjectBatchName.csproj.GenerateResource.cache
 C:\Users\doans\Documents\GitHub\BatchRename\ProjectBatchName\obj\Debug\ProjectBatchName.exe
 C:\Users\doans\Documents\GitHub\BatchRename\ProjectBatchName\obj\Debug\ProjectBatchName.pdb
-F:\OneDrive - VNU-HCMUS\HCMUS\Nam 3\Lap Trinh Windows\DoAn1\BatchRename\ProjectBatchName\bin\Debug\ProjectBatchName.exe
 C:\Users\hoang\Desktop\BatchRename\ProjectBatchName\obj\Debug\MainWindow.g.cs
 C:\Users\hoang\Desktop\BatchRename\ProjectBatchName\obj\Debug\App.g.cs
 C:\Users\hoang\Desktop\BatchRename\ProjectBatchName\obj\Debug\GeneratedInternalTypeHelper.g.cs
