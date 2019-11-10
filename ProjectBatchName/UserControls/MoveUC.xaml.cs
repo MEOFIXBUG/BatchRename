@@ -60,7 +60,7 @@ namespace ProjectBatchName.UserControls
             }
             else if (!int.TryParse(textBox.Text, out res))
             {
-                MessageBox.Show(Length must be an interger");
+                MessageBox.Show("Length must be an interger");
                 textBox.Text = oldTextInTextbox;
                 return;
             }
