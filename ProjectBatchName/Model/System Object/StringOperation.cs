@@ -1,6 +1,7 @@
 ﻿using ProjectBatchName.ViewModel;
 using System;
 using System.Collections.Generic;
+using System.IO;
 using System.Linq;
 using System.Text;
 using System.Text.RegularExpressions;
@@ -96,10 +97,12 @@ namespace ProjectBatchName.Model
 
         public override string Operate(string origin)
         {
-            string modified = String.Join(" ", origin.Split(new string[] { " " }, StringSplitOptions.RemoveEmptyEntries));
+            var exts = Path.GetExtension(origin);
+            var path = Path.GetFileNameWithoutExtension(origin);
+            string modified = String.Join(" ", path.Split(new string[] { " " }, StringSplitOptions.RemoveEmptyEntries));
             modified = modified.ToLower();
             modified = Regex.Replace(modified, @"(^\w)|(\s\w)", m => m.Value.ToUpper());
-            return modified;
+            return modified + exts;
         }
     }
 
@@ -116,7 +119,8 @@ namespace ProjectBatchName.Model
             {
                 Args = new MoveArgs()
                 {
-                    Mode = args.Mode
+                    Mode = args.Mode,
+                    Length = args.Length
                 }
             };
         }
@@ -124,26 +128,31 @@ namespace ProjectBatchName.Model
         public override string Operate(string origin)
         {
             var args = Args as MoveArgs;
-            string pattern = @"((978[\--– ])?[0-9][0-9\--– ]{10}[\--– ][0-9xX])|((978)?[0-9]{9}[0-9Xx])";
-            Regex myRegex = new Regex(pattern);
+          //  string pattern = @"((978[\--– ])?[0-9][0-9\--– ]{10}[\--– ][0-9xX])|((978)?[0-9]{9}[0-9Xx])";
+          //  Regex myRegex = new Regex(pattern);
             string ISBN = "";
-            foreach (Match match in myRegex.Matches(origin))
-            {
-                ISBN = match.ToString();
-                break;
-            }
+            //foreach (Match match in myRegex.Matches(origin))
+            //{
+            //    ISBN = match.ToString();
+            //    break;
+            //}
 
             //Not found ISBN in string
-            if (ISBN == "") return origin;
+            //if (ISBN == "") return origin;
+            var exts = Path.GetExtension(origin);
+            var path = Path.GetFileNameWithoutExtension(origin);
+            if (args.Length > path.Length || args.Length == 0) return origin;
             switch (args.Mode)
             {
                 //Case 1: move to head of string
                 case 1:
-                    return ISBN + " " + origin.Replace(ISBN, "");
+                    ISBN = path.Substring(path.Length - args.Length, args.Length);
+                    return ISBN + " " + path.Replace(ISBN, "") + exts;
 
                 //Case 2: move to tail of string
                 default:
-                    return origin.Replace(ISBN, "") + " " + ISBN;
+                    ISBN = path.Substring(0, args.Length);
+                    return path.Replace(ISBN, "") + " " + ISBN + exts;
             }
         }
     }
@@ -159,7 +168,8 @@ namespace ProjectBatchName.Model
 
         public override string Operate(string origin)
         {
-            return Guid.NewGuid().ToString();
+            var exts = Path.GetExtension(origin);
+            return Guid.NewGuid().ToString() + exts;
         }
     }
 }
