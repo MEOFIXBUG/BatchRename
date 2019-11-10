@@ -413,7 +413,7 @@ namespace ProjectBatchName.ViewModel
                 else if (action.Name == "Move")
                 {
                     var args = action.Args as MoveArgs;
-                    preset += "2" + "," + args.Mode + "\r\n";
+                    preset += "2" + "," + args.Mode + "," + args.Length + "\r\n";
                 }
                 else if (action.Name == "Unique Name")
                 {
@@ -477,8 +477,8 @@ namespace ProjectBatchName.ViewModel
                     }
                     if (tokens[i] == "2")
                     {
-                        actionList.Add(new Move() { Args = new MoveArgs() { Mode = Int32.Parse(tokens[i + 1]) } }); ;
-                        i += 2;
+                        actionList.Add(new Move() { Args = new MoveArgs() { Mode = Int32.Parse(tokens[i + 1]), Length = Int32.Parse(tokens[i + 2]) } });
+                        i += 3;
                         continue;
                     }
                     if (tokens[i] == "3")
