@@ -27,7 +27,7 @@
             </StackPanel>
 
             <StackPanel Orientation="Horizontal" Margin="0 10 0 0">
-                <TextBlock Margin="-10 0 10 0" Text="Length:" Width="40" Height="25" FontSize="13" FontWeight="Bold"></TextBlock>
+                <TextBlock Margin="-10 0 10 0" Text="Length:"  Height="25" FontSize="13" FontWeight="Bold"></TextBlock>
                 <TextBox Text="{Binding MoveArgs.Length, Converter={StaticResource stringConverter}}" 
                          Width="50">
 

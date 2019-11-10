@@ -77,19 +77,28 @@ namespace ProjectBatchName.Model
         int mode;
         int length;
 
-        public int Mode { get => mode; set { mode = value; OnPropertyChanged(); } }
-        public int Length { get => length; set { length = value; OnPropertyChanged(); } }
+        public int Mode { get => mode; set { mode = value; OnPropertyChanged(); OnPropertyChanged("Description"); } }
+        public int Length { get => length; set { length = value; OnPropertyChanged(); OnPropertyChanged("Description"); } }
         public string Description
         {
             get
             {
+                if (length>1)
                 switch (Mode)
                 {
                     case 1:
-                        return "Move ISBN to Start";
+                        return $"Move {Length} chars to Start";
                     default:
-                        return "Move ISBN to End";
+                        return $"Move {Length} chars to End";
                 }
+                else 
+                    switch (Mode)
+                    {
+                        case 1:
+                            return $"Move {Length} char to Start";
+                        default:
+                            return $"Move {Length} char to End";
+                    }
             }
         }
     }

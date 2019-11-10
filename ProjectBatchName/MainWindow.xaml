@@ -136,10 +136,16 @@
                     </ListView.ContextMenu>
                     <ListBox.ItemTemplate>
                         <DataTemplate>
-                            <StackPanel Orientation="Vertical">
-                                <TextBlock Text="{Binding Name}" FontFamily="Comic Sans MS" FontWeight="Bold" Foreground="Red"/>
-                                <TextBlock Text="{Binding Args.Description}"/>
+                            <StackPanel Orientation="Horizontal">
+                                <!--<StackPanel>
+                                    <TextBlock Text ="{Binding Count}"/>
+                                </StackPanel>-->
+                                <StackPanel Orientation="Vertical">
+                                    <TextBlock Text="{Binding Name}" FontFamily="Comic Sans MS" FontWeight="Bold" Foreground="Red"/>
+                                    <TextBlock Text="{Binding Args.Description}"/>
+                                </StackPanel>
                             </StackPanel>
+                           
                         </DataTemplate>
                     </ListBox.ItemTemplate>
                 </ListView>
