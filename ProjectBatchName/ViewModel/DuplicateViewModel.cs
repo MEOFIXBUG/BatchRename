@@ -91,7 +91,29 @@ namespace ProjectBatchName.ViewModel
         {
             if(SelectedMethodToSolve=="KeepOldName")
             {
-
+                var Temp1 = fileService.CopyAll(DuplicateFiles);
+                foreach (var item in Temp1)
+                {
+                    item.Newfilename = item.Filename;
+                    item.Error = "Duplicate/KeepOldName";
+                    var tempfile = new FileInfo(item.Path);
+                    tempfile.MoveTo(System.IO.Path.GetDirectoryName(item.Path) + "\\" + item.Newfilename );
+                }
+                var Temp2 = folderService.CopyAll(DuplicateFolders);
+                int count = 0;
+                foreach (var item in Temp2)
+                {
+                    item.Newfoldername = item.Foldername;
+                    item.Error = "Duplicate/KeepOldName";
+                    string tempFolderPath = System.IO.Path.GetDirectoryName(item.Path) + "\\Store" + $"{++count}";
+                    Directory.Move(tempFolderPath, item.Path);
+                }
+                DuplicateFiles.Clear();
+                DuplicateFiles = fileService.CopyAll(Temp1);
+                OnPropertyChanged("DuplicateFiles");
+                DuplicateFolders.Clear();
+                DuplicateFolders = folderService.CopyAll(Temp2);
+                OnPropertyChanged("DuplicateFolders");
             }
             else
             {
@@ -109,6 +131,7 @@ namespace ProjectBatchName.ViewModel
                         newfilepath = System.IO.Path.GetDirectoryName(item.Path) + "\\" + newfilename;
                     }
                     item.Newfilename = newfilename;
+                    item.Error = "Duplicate/Prefix";
                     var tempfile = new FileInfo(item.Path);
                     tempfile.MoveTo(System.IO.Path.GetDirectoryName(item.Path) + "\\" + newfilename);
                 }
@@ -135,7 +158,7 @@ namespace ProjectBatchName.ViewModel
                     }
                     string tempFolderPath = System.IO.Path.GetDirectoryName(item.Path) + "\\Store" + $"{count}";
                     item.Newfoldername = newfoldername;
-                    item.Error = "OK";
+                    item.Error = "Duplicate/Prefix";
                     Directory.Move(tempFolderPath, newfolderpath);
                 }
 
