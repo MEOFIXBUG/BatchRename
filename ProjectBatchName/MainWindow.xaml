@@ -71,16 +71,20 @@
                                 <TextBlock Text="Clear" Margin="1 3 0 0"/>
                             </StackPanel>
                         </Button>
-                        <Button  Width="20">
+                        <!--move to top-->
+                        <Button  Width="20" Command="{Binding MoveActionToTopCommand}">
                             <Image Source="/Images/GoToTop_16x.png" Stretch="None"/>
                         </Button>
-                        <Button  Width="20">
+                        <!--move up-->
+                        <Button  Width="20" Command="{Binding MmoveActionUpCommand}">
                             <Image Source="/Images/ExpandChevronUp_16x.png" Stretch="None"/>
                         </Button>
-                        <Button  Width="20">
+                        <!--move down-->
+                        <Button  Width="20"  Command="{Binding MmoveActionDownCommand}">
                             <Image Source="/Images/ExpandChevronDown_16x.png" Stretch="None"/>
                         </Button>
-                        <Button  Width="20">
+                        <!--move to bottom-->
+                        <Button  Width="20" Command="{Binding MoveActionToBottomCommand}">
                             <Image Source="/Images/GoToBottom_16x.png" Stretch="None"/>
                         </Button>
                     </StackPanel>
@@ -107,15 +111,11 @@
         </StackPanel>
         <Grid Grid.Row="1" Margin="0 0 0 0 ">
             <Grid.ColumnDefinitions>
-                <ColumnDefinition Width="158*"/>
-                <ColumnDefinition Width="68*"/>
-                <ColumnDefinition Width="567*"/>
+                <ColumnDefinition Width="2*"/>
+                <ColumnDefinition Width="5*"/>
             </Grid.ColumnDefinitions>
-            <Grid Grid.ColumnSpan="2" Margin="0,0,0.4,0.2">
-                <Grid.ColumnDefinitions>
-                    <ColumnDefinition Width="44.8"/>
-                    <ColumnDefinition/>
-                </Grid.ColumnDefinitions>
+            <!--List actions-->
+            <Grid Margin="0,0,0.4,0.2">               
                 <Grid.RowDefinitions>
                     <RowDefinition Height="3*"></RowDefinition>
                     <RowDefinition Height="3"></RowDefinition>
@@ -150,8 +150,9 @@
                     </ListBox.ItemTemplate>
                 </ListView>
                 <GridSplitter Height="5" Grid.Column="1" Margin="0,97,0,97.2" ></GridSplitter>
-                <ContentPresenter Grid.Row="1"
-                                  Content="{Binding ElementName=ActionListBox, Path=SelectedValue}" Grid.ColumnSpan="2" Margin="0,2.8,0,0.2" Grid.RowSpan="2">
+                
+                <ContentPresenter Grid.Row="2"
+                                  Content="{Binding ElementName=ActionListBox, Path=SelectedValue}"  Margin="0,2.8,0,0.2">
                     <ContentPresenter.Resources>
 
                         <!--ReplaceOperation-->
@@ -177,10 +178,12 @@
 
                     </ContentPresenter.Resources>
                 </ContentPresenter>
+                
             </Grid>
 
-            <GridSplitter Width="3px" Grid.Column="1" Margin="0,0,0.4,0.2"></GridSplitter>
-            <TabControl Grid.Column="1" Grid.ColumnSpan="2" Margin="67.665,0,-0.4,0.2">
+            <GridSplitter Width="3px"></GridSplitter>
+            <TabControl Grid.Column="1"
+                        Margin="0">
                 <TabItem>
                     <TabItem.Header>
                         <StackPanel Orientation="Horizontal">

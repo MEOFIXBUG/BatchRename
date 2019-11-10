@@ -204,7 +204,7 @@ namespace ProjectBatchName.ViewModel
             CommonOpenFileDialog dialog = new CommonOpenFileDialog();
             dialog.IsFolderPicker = true;
 
-            if (dialog.ShowDialog() == CommonFileDialogResult.Ok)            
+            if (dialog.ShowDialog() == CommonFileDialogResult.Ok)
             {
                 var listFile = Directory.GetFiles(dialog.FileName);
                 //var listFile = Directory.GetFiles(dialog.FileName);
@@ -489,7 +489,7 @@ namespace ProjectBatchName.ViewModel
                     }
                     if (tokens[i] == "4")
                     {
-                        actionList.Add(new NewFullnameNormalize() { Args = new NewFullNameNormalizeArgs()});
+                        actionList.Add(new NewFullnameNormalize() { Args = new NewFullNameNormalizeArgs() });
                         i += 1;
                         continue;
                     }
@@ -498,6 +498,90 @@ namespace ProjectBatchName.ViewModel
             }
 
         }
+        #endregion
+        #endregion
+
+        #region Move Acton Command
+        #region Move To Top
+        private ICommand moveActionToTopCommand;
+        public ICommand MoveActionToTopCommand
+        {
+            get
+            {
+                return moveActionToTopCommand ??
+                     (moveActionToTopCommand = new RelayCommand<object>(
+                         (p) => { return SelectedAction > 0 ? true : false; },
+                         (p) =>
+                            {
+                                if (SelectedAction > 0)
+                                    actionList.Move(SelectedAction, 0);
+                            }));
+
+
+            }
+        }
+
+
+        #endregion
+
+        #region Move up
+        private ICommand moveActionUpCommand;
+        public ICommand MmoveActionUpCommand
+        {
+            get
+            {
+                return moveActionUpCommand ??
+                     (moveActionUpCommand = new RelayCommand<object>(
+                         (p) => { return SelectedAction > 0 ? true : false; },
+                         (p) =>
+                         {
+                             if (SelectedAction > 0)
+                                 actionList.Move(SelectedAction, SelectedAction - 1);
+                         }));
+
+
+            }
+        }
+        #endregion
+
+        #region Move Down
+        private ICommand moveActionDownCommand;
+        public ICommand MmoveActionDownCommand
+        {
+            get
+            {
+                return moveActionDownCommand ??
+                     (moveActionDownCommand = new RelayCommand<object>(
+                         (p) => { return SelectedAction >= 0 && SelectedAction < actionList.Count -1 ? true : false; },
+                         (p) =>
+                         {
+                             if (SelectedAction < actionList.Count - 1)
+                                 actionList.Move(SelectedAction, SelectedAction + 1);
+                         }));
+
+
+            }
+        }
+
+        #region Move to bottom
+        private ICommand moveActionToBottomCommand;
+        public ICommand MoveActionToBottomCommand
+        {
+            get
+            {
+                return moveActionToBottomCommand ??
+                     (moveActionToBottomCommand = new RelayCommand<object>(
+                         (p) => { return SelectedAction >= 0 && SelectedAction < actionList.Count - 1 ? true : false; },
+                         (p) =>
+                         {
+                             if (SelectedAction < actionList.Count - 1)
+                                 actionList.Move(SelectedAction, actionList.Count - 1);
+                         }));
+
+
+            }
+        }
+        #endregion
         #endregion
         #endregion
 
@@ -600,7 +684,7 @@ namespace ProjectBatchName.ViewModel
 
             if (isDuplicate == true)
             {
-                
+
                 DuplicateProcess dupWin = new DuplicateProcess(DuplicateFiles, DuplicateFolders);
                 dupWin.ShowDialog();
             }

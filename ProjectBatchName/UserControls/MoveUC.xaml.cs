@@ -1,4 +1,5 @@
-﻿using ProjectBatchName.Model;
+﻿using Microsoft.Xaml.Behaviors;
+using ProjectBatchName.Model;
 using System;
 using System.Collections.Generic;
 using System.Linq;
@@ -50,4 +51,5 @@ namespace ProjectBatchName.UserControls
 
        
     }
+   
 }

@@ -5,6 +5,7 @@
              xmlns:d="http://schemas.microsoft.com/expression/blend/2008" 
              xmlns:local="clr-namespace:ProjectBatchName.UserControls"
              mc:Ignorable="d" 
+             xmlns:i="http://schemas.microsoft.com/xaml/behaviors"
              d:DesignHeight="150" d:DesignWidth="200"
              x:Name="uc"
                        >
@@ -13,7 +14,7 @@
             <RowDefinition Height="2*"></RowDefinition>
             <RowDefinition Height="2*"></RowDefinition>
             <RowDefinition  Height="2*"></RowDefinition>
-            <RowDefinition Height="2*"></RowDefinition>
+            <RowDefinition Height="20"></RowDefinition>
         </Grid.RowDefinitions>
         <TextBlock Grid.Row="0" Text="Config Action: " FontSize="15" FontWeight="Bold"
                       Padding="5" />
@@ -22,19 +23,23 @@
                     VerticalAlignment="Center"
                     Margin="20 0 10 0">
             <TextBlock Width="50" Height="25" Text="From:" HorizontalAlignment="Left"></TextBlock>
-            <TextBox Name="from" Width="100" Text="{Binding ReplaceArgs.From}"></TextBox>
+            <TextBox Name="from" Width="100" Text="{Binding ReplaceArgs.From}">
+                <i:Interaction.Behaviors>
+                    <local:TextBoxEnterKeyUpdateBehavior></local:TextBoxEnterKeyUpdateBehavior>
+                </i:Interaction.Behaviors>
+            </TextBox>
         </StackPanel>
         <StackPanel Orientation="Horizontal" Grid.Row="2"
                     HorizontalAlignment="Center"
                     VerticalAlignment="Center"
                     Margin="20 0 10 0">
             <TextBlock Width="50" Height="25" Text="To:" HorizontalAlignment="Left"></TextBlock>
-            <TextBox Name="to" Width="100" Text="{Binding ReplaceArgs.To}"></TextBox>
+            <TextBox Name="to" Width="100" Text="{Binding ReplaceArgs.To}">
+                <i:Interaction.Behaviors>
+                    <local:TextBoxEnterKeyUpdateBehavior></local:TextBoxEnterKeyUpdateBehavior>
+                </i:Interaction.Behaviors>
+            </TextBox>
         </StackPanel>
-        <Button Click="Button_Click"
-                Grid.Row="3" Width="50" Height="25" 
-                Content="Okay"
-                HorizontalAlignment="Right"
-                Margin="0 0 10 5"></Button>
+       
     </Grid>
 </local:BaseUserControl>

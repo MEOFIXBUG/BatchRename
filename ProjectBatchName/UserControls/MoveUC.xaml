@@ -4,6 +4,7 @@
              xmlns:mc="http://schemas.openxmlformats.org/markup-compatibility/2006" 
              xmlns:d="http://schemas.microsoft.com/expression/blend/2008" 
              xmlns:local="clr-namespace:ProjectBatchName.UserControls"
+             xmlns:i="http://schemas.microsoft.com/xaml/behaviors"
              mc:Ignorable="d" 
              d:DesignHeight="150" d:DesignWidth="200"
              Loaded="BaseUserControl_Loaded">
@@ -13,26 +14,33 @@
             <local:RadioBoolToIntConverter x:Key="radioButtonConverter"/>
         </Grid.Resources>
         <Grid.RowDefinitions>
-            <RowDefinition Height="30"></RowDefinition>
-            <RowDefinition></RowDefinition>
+            <RowDefinition Height="25"></RowDefinition>
+            <RowDefinition Height="2*"></RowDefinition>
         </Grid.RowDefinitions>
         <TextBlock Grid.Row="0" Text="Config Action: " FontSize="15" FontWeight="Bold"
                       Padding="5" />
         <StackPanel Grid.Row="1" HorizontalAlignment="Center" VerticalAlignment="Center">
             <TextBlock Text="Move option" FontSize="13" FontWeight="Bold"
-                       Margin="-10 0 0 10"/>
+                       Margin="-10 0 0 5"/>
             <StackPanel>
                 <RadioButton Name="button1" Content="Move to start" IsChecked="{Binding MoveArgs.Mode, Converter={StaticResource radioButtonConverter}, ConverterParameter=1}"></RadioButton>
                 <RadioButton Name="button2" Content="Move to end" IsChecked="{Binding MoveArgs.Mode, Converter={StaticResource radioButtonConverter}, ConverterParameter=2}"></RadioButton>
             </StackPanel>
 
-            <StackPanel Orientation="Horizontal" Margin="0 10 0 0">
-                <TextBlock Margin="-10 0 10 0" Text="Length:"  Height="25" FontSize="13" FontWeight="Bold"></TextBlock>
+            <StackPanel Orientation="Horizontal" Margin="0 5 0 0">
+                <TextBlock VerticalAlignment="Center" Margin="-10 0 10 0" 
+                           Text="Length:"  
+                           Height="25" Width="60"
+                           FontSize="13" FontWeight="Bold"></TextBlock>
                 <TextBox Text="{Binding MoveArgs.Length, Converter={StaticResource stringConverter}}" 
-                         Width="50">
+                         Width="50" Height="20" VerticalAlignment="Center">
+                    <i:Interaction.Behaviors>
+                        <local:TextBoxEnterKeyUpdateBehavior></local:TextBoxEnterKeyUpdateBehavior>
+                    </i:Interaction.Behaviors>
 
                 </TextBox>
             </StackPanel>
         </StackPanel>
+        
     </Grid>
 </local:BaseUserControl>

@@ -51,3 +51,6 @@ C:\Users\hoang\Desktop\BatchRename\ProjectBatchName\bin\Debug\Microsoft.WindowsA
 C:\Users\hoang\Desktop\BatchRename\ProjectBatchName\bin\Debug\Microsoft.WindowsAPICodePack.xml
 C:\Users\hoang\Desktop\BatchRename\ProjectBatchName\bin\Debug\Microsoft.WindowsAPICodePack.Shell.xml
 C:\Users\hoang\Desktop\BatchRename\ProjectBatchName\obj\Debug\ProjectBatchName.csproj.CopyComplete
+C:\Users\hoang\Desktop\BatchRename\ProjectBatchName\bin\Debug\Microsoft.Xaml.Behaviors.dll
+C:\Users\hoang\Desktop\BatchRename\ProjectBatchName\bin\Debug\Microsoft.Xaml.Behaviors.pdb
+C:\Users\hoang\Desktop\BatchRename\ProjectBatchName\bin\Debug\Microsoft.Xaml.Behaviors.xml
