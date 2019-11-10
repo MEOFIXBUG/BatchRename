@@ -97,7 +97,7 @@ namespace ProjectBatchName.ViewModel
                     item.Newfilename = item.Filename;
                     item.Error = "Duplicate/KeepOldName";
                     var tempfile = new FileInfo(item.Path);
-                    tempfile.MoveTo(System.IO.Path.GetDirectoryName(item.Path) + "\\" + item.Newfilename );
+                    tempfile.MoveTo(System.IO.Path.GetDirectoryName(item.Path) + "\\" + item.Filename);
                 }
                 var Temp2 = folderService.CopyAll(DuplicateFolders);
                 int count = 0;

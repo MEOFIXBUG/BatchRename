@@ -691,10 +691,10 @@ namespace ProjectBatchName.ViewModel
             Preview previewWin = new Preview(fileInfoList, folderInfoList);
             previewWin.ShowDialog();
             fileInfoList.Clear();
-            fileInfoList = fileService.CopyAll(Temp1);
+            //fileInfoList = fileService.CopyAll(Temp1);
             OnPropertyChanged("fileInfoList");
             folderInfoList.Clear();
-            folderInfoList = folderService.CopyAll(Temp2);
+            //folderInfoList = folderService.CopyAll(Temp2);
             OnPropertyChanged("folderInfoList");
 
         }
