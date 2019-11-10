@@ -53,15 +53,18 @@ namespace ProjectBatchName.UserControls
         private void TextBox_LostFocus(object sender, RoutedEventArgs e)
         {
             var textBox = sender as TextBox;
-            int res;
-            if (!int.TryParse(textBox.Text, out res))
+            int res = 0;
+            if (textBox.Text.Length == 0)
             {
-                MessageBox.Show("Length must be an interger");
+                return;
+            }
+            else if (!int.TryParse(textBox.Text, out res))
+            {
+                MessageBox.Show(Length must be an interger");
                 textBox.Text = oldTextInTextbox;
                 return;
             }
 
-            MoveArgs.Length = res;
 
         }
 

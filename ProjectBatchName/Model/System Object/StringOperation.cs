@@ -76,11 +76,12 @@ namespace ProjectBatchName.Model
             switch (args.Mode)
             {
                 case 1:
-                    return origin.ToUpper();
-                case 2:
                     return origin.ToLower();
+                case 2:
+                    return origin.ToUpper();
                 default:
-                    var s = Regex.Replace(origin, @"(^\w)|(\s\w)", m => m.Value.ToUpper());
+                    var s = origin.ToLower();
+                    s = Regex.Replace(s , @"(^\w)|(\s\w)", m => m.Value.ToUpper());
                     return s;
             }
         }
