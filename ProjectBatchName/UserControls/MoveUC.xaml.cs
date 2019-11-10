@@ -44,12 +44,62 @@ namespace ProjectBatchName.UserControls
                     button1.IsChecked = true;
                     break;
                 default:
-                    button2.IsChecked = true;                   
+                    button2.IsChecked = true;
                     break;
             }
         }
 
-       
+        private string oldTextInTextbox;
+        private void TextBox_LostFocus(object sender, RoutedEventArgs e)
+        {
+            var textBox = sender as TextBox;
+            int res;
+            if (!int.TryParse(textBox.Text, out res))
+            {
+                MessageBox.Show("Length must be an interger");
+                textBox.Text = oldTextInTextbox;
+                return;
+            }
+
+            MoveArgs.Length = res;
+
+        }
+
+        private void TextBox_GotFocus(object sender, RoutedEventArgs e)
+        {
+            var textBox = sender as TextBox;
+            oldTextInTextbox = textBox.Text;
+        }
     }
-   
+    public class ClearFocusOnOutsideClickBehavior : Behavior<FrameworkElement>
+    {
+        protected override void OnAttached()
+        {
+
+            AssociatedObject.GotFocus += AssociatedObjectOnGotFocus;
+            AssociatedObject.LostFocus += AssociatedObjectOnLostFocus;
+            base.OnAttached();
+        }
+
+        private void AssociatedObjectOnLostFocus(object sender, RoutedEventArgs e)
+        {
+            App.Current.MainWindow.MouseUp -= _paren_PreviewMouseUp;
+        }
+
+        private void AssociatedObjectOnGotFocus(object sender, RoutedEventArgs e)
+        {
+            App.Current.MainWindow.MouseUp += _paren_PreviewMouseUp;
+        }
+
+        private void _paren_PreviewMouseUp(object sender, MouseButtonEventArgs e)
+        {
+            Keyboard.ClearFocus();
+        }
+
+        protected override void OnDetaching()
+        {
+            AssociatedObject.GotFocus -= AssociatedObjectOnGotFocus;
+            AssociatedObject.LostFocus -= AssociatedObjectOnLostFocus;
+        }
+    }
 }

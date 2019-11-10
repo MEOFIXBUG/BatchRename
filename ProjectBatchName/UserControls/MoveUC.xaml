@@ -33,8 +33,13 @@
                            Height="25" Width="60"
                            FontSize="13" FontWeight="Bold"></TextBlock>
                 <TextBox Text="{Binding MoveArgs.Length, Converter={StaticResource stringConverter}}" 
-                         Width="50" Height="20" VerticalAlignment="Center">
+                         Width="50" Height="20" VerticalAlignment="Center"
+                         LostFocus="TextBox_LostFocus"
+                         GotFocus="TextBox_GotFocus"
+                         Name="lengthTextBox"
+                         >
                     <i:Interaction.Behaviors>
+                        <local:ClearFocusOnOutsideClickBehavior></local:ClearFocusOnOutsideClickBehavior>
                         <local:TextBoxEnterKeyUpdateBehavior></local:TextBoxEnterKeyUpdateBehavior>
                     </i:Interaction.Behaviors>
 

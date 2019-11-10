@@ -8,7 +8,9 @@
         xmlns:usercontrols="clr-namespace:ProjectBatchName.UserControls"
         mc:Ignorable="d"
         DataContext="{StaticResource MainVM}"
-        Title="Batch Rename" Height="450" Width="800">
+        Title="Batch Rename" Height="450" Width="800"
+        >
+    
     <Grid>
         <Grid.ColumnDefinitions>
             <ColumnDefinition Width="*" />
