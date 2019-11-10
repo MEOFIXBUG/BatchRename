@@ -51,3 +51,40 @@ C:\Users\hoang\Desktop\BatchRename\ProjectBatchName\bin\Debug\Microsoft.WindowsA
 C:\Users\hoang\Desktop\BatchRename\ProjectBatchName\bin\Debug\Microsoft.WindowsAPICodePack.xml
 C:\Users\hoang\Desktop\BatchRename\ProjectBatchName\bin\Debug\Microsoft.WindowsAPICodePack.Shell.xml
 C:\Users\hoang\Desktop\BatchRename\ProjectBatchName\obj\Debug\ProjectBatchName.csproj.CopyComplete
+F:\OneDrive - VNU-HCMUS\HCMUS\Nam 3\Lap Trinh Windows\DoAn1\BatchRename\ProjectBatchName\bin\Debug\ProjectBatchName.exe.config
+F:\OneDrive - VNU-HCMUS\HCMUS\Nam 3\Lap Trinh Windows\DoAn1\BatchRename\ProjectBatchName\bin\Debug\ProjectBatchName.exe
+F:\OneDrive - VNU-HCMUS\HCMUS\Nam 3\Lap Trinh Windows\DoAn1\BatchRename\ProjectBatchName\bin\Debug\ProjectBatchName.pdb
+F:\OneDrive - VNU-HCMUS\HCMUS\Nam 3\Lap Trinh Windows\DoAn1\BatchRename\ProjectBatchName\bin\Debug\Microsoft.WindowsAPICodePack.dll
+F:\OneDrive - VNU-HCMUS\HCMUS\Nam 3\Lap Trinh Windows\DoAn1\BatchRename\ProjectBatchName\bin\Debug\Microsoft.WindowsAPICodePack.Shell.dll
+F:\OneDrive - VNU-HCMUS\HCMUS\Nam 3\Lap Trinh Windows\DoAn1\BatchRename\ProjectBatchName\bin\Debug\Microsoft.WindowsAPICodePack.xml
+F:\OneDrive - VNU-HCMUS\HCMUS\Nam 3\Lap Trinh Windows\DoAn1\BatchRename\ProjectBatchName\bin\Debug\Microsoft.WindowsAPICodePack.Shell.xml
+F:\OneDrive - VNU-HCMUS\HCMUS\Nam 3\Lap Trinh Windows\DoAn1\BatchRename\ProjectBatchName\obj\Debug\ProjectBatchName.csprojAssemblyReference.cache
+F:\OneDrive - VNU-HCMUS\HCMUS\Nam 3\Lap Trinh Windows\DoAn1\BatchRename\ProjectBatchName\obj\Debug\DuplicateProcess.g.cs
+F:\OneDrive - VNU-HCMUS\HCMUS\Nam 3\Lap Trinh Windows\DoAn1\BatchRename\ProjectBatchName\obj\Debug\Preview.g.cs
+F:\OneDrive - VNU-HCMUS\HCMUS\Nam 3\Lap Trinh Windows\DoAn1\BatchRename\ProjectBatchName\obj\Debug\MainWindow.g.cs
+F:\OneDrive - VNU-HCMUS\HCMUS\Nam 3\Lap Trinh Windows\DoAn1\BatchRename\ProjectBatchName\obj\Debug\UserControls\FullNameNormalizeUC.g.cs
+F:\OneDrive - VNU-HCMUS\HCMUS\Nam 3\Lap Trinh Windows\DoAn1\BatchRename\ProjectBatchName\obj\Debug\UserControls\MoveUC.g.cs
+F:\OneDrive - VNU-HCMUS\HCMUS\Nam 3\Lap Trinh Windows\DoAn1\BatchRename\ProjectBatchName\obj\Debug\UserControls\NewCaseUC.g.cs
+F:\OneDrive - VNU-HCMUS\HCMUS\Nam 3\Lap Trinh Windows\DoAn1\BatchRename\ProjectBatchName\obj\Debug\UserControls\ReplaceUC.g.cs
+F:\OneDrive - VNU-HCMUS\HCMUS\Nam 3\Lap Trinh Windows\DoAn1\BatchRename\ProjectBatchName\obj\Debug\UserControls\UniqueName.g.cs
+F:\OneDrive - VNU-HCMUS\HCMUS\Nam 3\Lap Trinh Windows\DoAn1\BatchRename\ProjectBatchName\obj\Debug\App.g.cs
+F:\OneDrive - VNU-HCMUS\HCMUS\Nam 3\Lap Trinh Windows\DoAn1\BatchRename\ProjectBatchName\obj\Debug\GeneratedInternalTypeHelper.g.cs
+F:\OneDrive - VNU-HCMUS\HCMUS\Nam 3\Lap Trinh Windows\DoAn1\BatchRename\ProjectBatchName\obj\Debug\ProjectBatchName_MarkupCompile.cache
+F:\OneDrive - VNU-HCMUS\HCMUS\Nam 3\Lap Trinh Windows\DoAn1\BatchRename\ProjectBatchName\obj\Debug\ProjectBatchName_MarkupCompile.lref
+F:\OneDrive - VNU-HCMUS\HCMUS\Nam 3\Lap Trinh Windows\DoAn1\BatchRename\ProjectBatchName\obj\Debug\App.baml
+F:\OneDrive - VNU-HCMUS\HCMUS\Nam 3\Lap Trinh Windows\DoAn1\BatchRename\ProjectBatchName\obj\Debug\DuplicateProcess.baml
+F:\OneDrive - VNU-HCMUS\HCMUS\Nam 3\Lap Trinh Windows\DoAn1\BatchRename\ProjectBatchName\obj\Debug\Preview.baml
+F:\OneDrive - VNU-HCMUS\HCMUS\Nam 3\Lap Trinh Windows\DoAn1\BatchRename\ProjectBatchName\obj\Debug\MainWindow.baml
+F:\OneDrive - VNU-HCMUS\HCMUS\Nam 3\Lap Trinh Windows\DoAn1\BatchRename\ProjectBatchName\obj\Debug\MyResource\MainResource.baml
+F:\OneDrive - VNU-HCMUS\HCMUS\Nam 3\Lap Trinh Windows\DoAn1\BatchRename\ProjectBatchName\obj\Debug\UserControls\FullNameNormalizeUC.baml
+F:\OneDrive - VNU-HCMUS\HCMUS\Nam 3\Lap Trinh Windows\DoAn1\BatchRename\ProjectBatchName\obj\Debug\UserControls\MoveUC.baml
+F:\OneDrive - VNU-HCMUS\HCMUS\Nam 3\Lap Trinh Windows\DoAn1\BatchRename\ProjectBatchName\obj\Debug\UserControls\NewCaseUC.baml
+F:\OneDrive - VNU-HCMUS\HCMUS\Nam 3\Lap Trinh Windows\DoAn1\BatchRename\ProjectBatchName\obj\Debug\UserControls\ReplaceUC.baml
+F:\OneDrive - VNU-HCMUS\HCMUS\Nam 3\Lap Trinh Windows\DoAn1\BatchRename\ProjectBatchName\obj\Debug\UserControls\UniqueName.baml
+F:\OneDrive - VNU-HCMUS\HCMUS\Nam 3\Lap Trinh Windows\DoAn1\BatchRename\ProjectBatchName\obj\Debug\ProjectBatchName.g.resources
+F:\OneDrive - VNU-HCMUS\HCMUS\Nam 3\Lap Trinh Windows\DoAn1\BatchRename\ProjectBatchName\obj\Debug\ProjectBatchName.Properties.Resources.resources
+F:\OneDrive - VNU-HCMUS\HCMUS\Nam 3\Lap Trinh Windows\DoAn1\BatchRename\ProjectBatchName\obj\Debug\ProjectBatchName.csproj.GenerateResource.cache
+F:\OneDrive - VNU-HCMUS\HCMUS\Nam 3\Lap Trinh Windows\DoAn1\BatchRename\ProjectBatchName\obj\Debug\ProjectBatchName.csproj.CoreCompileInputs.cache
+F:\OneDrive - VNU-HCMUS\HCMUS\Nam 3\Lap Trinh Windows\DoAn1\BatchRename\ProjectBatchName\obj\Debug\ProjectBatchName.csproj.CopyComplete
+F:\OneDrive - VNU-HCMUS\HCMUS\Nam 3\Lap Trinh Windows\DoAn1\BatchRename\ProjectBatchName\obj\Debug\ProjectBatchName.exe
+F:\OneDrive - VNU-HCMUS\HCMUS\Nam 3\Lap Trinh Windows\DoAn1\BatchRename\ProjectBatchName\obj\Debug\ProjectBatchName.pdb

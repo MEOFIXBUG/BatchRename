@@ -171,7 +171,7 @@ namespace ProjectBatchName.ViewModel
                 operationCollection.Add(new ReplaceOpertion() { Args = new ReplaceArgs() { From = "From", To = "To" } });
                 operationCollection.Add(new NewCaseOperation() { Args = new NewCaseArgs() { Mode = 3 } });
                 operationCollection.Add(new NewFullnameNormalize() { Args = new NewFullNameNormalizeArgs() }); ;
-                operationCollection.Add(new Move() { Args = new MoveArgs() { Mode = 1 } });
+                operationCollection.Add(new Move() { Args = new MoveArgs() { Mode = 1 , Length = 0} });
                 operationCollection.Add(new UniqueName() { Args = new UniqueNameArgs() });
                 actionList = new ObservableCollection<StringOperation>();
             }
