@@ -24,6 +24,8 @@ namespace ProjectBatchName
         public DuplicateProcess(ObservableCollection<fileInfo> DuplicateFiles, ObservableCollection<folderInfo> DuplicateFolders)
         {
             InitializeComponent();
+            FolderDuplicateTab.Items.Clear();
+            FileDuplicateTab.Items.Clear();
             FileDuplicateTab.ItemsSource = DuplicateFiles;
             FolderDuplicateTab.ItemsSource = DuplicateFolders;
         }

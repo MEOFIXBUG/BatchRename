@@ -600,6 +600,7 @@ namespace ProjectBatchName.ViewModel
 
             if (isDuplicate == true)
             {
+                
                 DuplicateProcess dupWin = new DuplicateProcess(DuplicateFiles, DuplicateFolders);
                 dupWin.ShowDialog();
             }

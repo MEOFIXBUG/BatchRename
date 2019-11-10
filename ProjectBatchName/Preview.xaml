@@ -44,7 +44,7 @@
                     <DataGrid Name="FolderPreviewTab" Background="Transparent" GridLinesVisibility="All"  AutoGenerateColumns="False" ScrollViewer.CanContentScroll="True" ScrollViewer.VerticalScrollBarVisibility="Auto" >
                         <DataGrid.Columns>
                             <DataGridTextColumn Header="Foldername" Width="150" Binding="{Binding Foldername}"/>
-                            <DataGridTextColumn Header="New Foldername" Width="150" Binding="{Binding Newfolder}"/>
+                            <DataGridTextColumn Header="New Foldername" Width="150" Binding="{Binding Newfoldername}"/>
                             <DataGridTextColumn Header="Folder Path" Width="150" Binding="{Binding Path}"/>
                             <DataGridTextColumn Header="Errro" Width="*" Binding="{Binding Error}"/>
                         </DataGrid.Columns>
@@ -53,8 +53,7 @@
             </TabItem>
         </TabControl>
         <StackPanel Orientation="Horizontal" Grid.Row="2" HorizontalAlignment="Center">
-            <Button Name="ApplyButton" Width="60" Height="30" Grid.Row="2" Content="Apply" Click="ApplyButton_Click" Margin="10" />
-            <Button Name ="CancelButton" Width="60" Height="30" Grid.Row="2" Content="Cancel" Margin="10" Click="CancelButton_Click" />
+            
         </StackPanel>
         
     </Grid>

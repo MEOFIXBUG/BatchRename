@@ -99,30 +99,41 @@ namespace ProjectBatchName.ViewModel
 
                 foreach (var item in Temp1)
                 {
-                    string newfilePath = item.Path;
-                    int prefix = 1;
-                    do
+                    int prefix = 0;
+                    string newfilepath = item.Path;
+                    string newfilename = "";
+                    while (System.IO.File.Exists(newfilepath))
                     {
-                        item.Newfilename = item.Newfilename.Insert(item.Newfilename.IndexOf(Path.GetExtension(item.Newfilename), 1), prefix.ToString());
-                        newfilePath = System.IO.Path.GetDirectoryName(item.Path) + "'\\" + item.Newfilename;
-                        prefix++;
-                    } while (System.IO.File.Exists(newfilePath));
+                        ++prefix;
+                        newfilename = item.Newfilename.Insert(item.Newfilename.IndexOf(Path.GetExtension(item.Newfilename), 1), prefix.ToString());
+                        newfilepath = System.IO.Path.GetDirectoryName(item.Path) + "\\" + newfilename;
+                    }
+                    item.Newfilename = newfilename;
                     var tempfile = new FileInfo(item.Path);
-                    tempfile.MoveTo(System.IO.Path.GetDirectoryName(item.Path) + "\\" + item.Newfilename);
+                    tempfile.MoveTo(System.IO.Path.GetDirectoryName(item.Path) + "\\" + newfilename);
                 }
                 var Temp2 = folderService.CopyAll(DuplicateFolders);
-                int next = 0;
-                foreach (var item in Temp2)
+                int count = 0;
+                foreach (var item  in Temp2)
                 {
                     string newfolderpath = System.IO.Path.GetDirectoryName(item.Path) + "\\" + item.Newfoldername;
                     string newfoldername = "";
-                    while (System.IO.Directory.Exists(newfolderpath))
+                    if (System.IO.Directory.Exists(newfolderpath) == false)
                     {
-                        ++next;
-                        newfoldername = item.Newfoldername +  $"{next}" ;
+                        ++count;
+                        newfoldername = item.Newfoldername;
                         newfolderpath = System.IO.Path.GetDirectoryName(item.Path) + "\\" + newfoldername;
                     }
-                    string tempFolderPath = System.IO.Path.GetDirectoryName(item.Path) + "\\Store" + $"{next}";
+                    else
+                    {
+                        while (System.IO.Directory.Exists(newfolderpath))
+                        {
+                            ++count;
+                            newfoldername = item.Newfoldername + $"{count}";
+                            newfolderpath = System.IO.Path.GetDirectoryName(item.Path) + "\\" + newfoldername;
+                        }
+                    }
+                    string tempFolderPath = System.IO.Path.GetDirectoryName(item.Path) + "\\Store" + $"{count}";
                     item.Newfoldername = newfoldername;
                     item.Error = "OK";
                     Directory.Move(tempFolderPath, newfolderpath);
